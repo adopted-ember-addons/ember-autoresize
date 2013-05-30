@@ -131,13 +131,13 @@ var normalizeMargin = function (margin) {
   @return {Object} Layout properties of the element
  */
 function layoutOf(element) {
-  var boxSizing  = boxSizingOf(element),
-      dimensions = {
+  var boxSizing = boxSizingOf(element),
+      content = {
         width:  element.offsetWidth,
         height: element.offsetHeight
       },
-      styles     = computedStylesFor(element),
-      boxModel   = {
+      styles = computedStylesFor(element),
+      layout = {
         width:     null,
         height:    null,
         boxSizing: boxSizing,
@@ -167,40 +167,38 @@ function layoutOf(element) {
 
   // Normalize the width and height so
   // they refer to the content
-  dimensions.width  -= borders.right + borders.left +
-                       padding.right + padding.left;
-  dimensions.height -= borders.top + borders.bottom +
-                       padding.top + padding.bottom;
+  content.width  -= borders.right + borders.left +
+                    padding.right + padding.left;
+  content.height -= borders.top + borders.bottom +
+                    padding.top + padding.bottom;
+  layout.content = content;
 
-  boxModel.content.width  = dimensions.width;
-  boxModel.content.height = dimensions.height;
-
-  padding.width  = dimensions.width +
+  padding.width  = content.width +
                    padding.left + padding.right;
-  padding.height = dimensions.height +
+  padding.height = content.height +
                    padding.top + padding.bottom;
-  boxModel.padding = padding;
+  layout.padding = padding;
 
   borders.width  = padding.width +
                    borders.left + borders.right;
   borders.height = padding.height +
                    borders.top + borders.bottom;
-  boxModel.borders = borders;
+  layout.borders = borders;
 
   // Provide the "true" width and height
   // of the box in terms of the current box model
   switch (boxSizing) {
   case 'border-box':
-    boxModel.width  = borders.width;
-    boxModel.height = borders.height;
+    layout.width  = borders.width;
+    layout.height = borders.height;
     break;
   case 'padding-box':
-    boxModel.width  = padding.width;
-    boxModel.height = padding.height;
+    layout.width  = padding.width;
+    layout.height = padding.height;
     break;
   default:
-    boxModel.width  = content.width;
-    boxModel.height = content.height;
+    layout.width  = content.width;
+    layout.height = content.height;
   }
 
   if (margins.left !== 'auto' && margins.right !== 'auto') {
@@ -216,9 +214,9 @@ function layoutOf(element) {
   } else {
     margins.height = 'auto';
   }
-  boxModel.margins = margins;
+  layout.margins = margins;
 
-  return boxModel;
+  return layout;
 };
 
 /**
