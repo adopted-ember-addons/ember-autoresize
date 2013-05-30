@@ -276,7 +276,7 @@ function prepareStringMeasurement(exampleElement, additionalStyles) {
     element.style.font = font;
   }
 
-  Em.mixin(element.style, {
+  Ember.mixin(element.style, {
     position: "absolute",
     top:    "0px",
     right:  "auto",
@@ -311,7 +311,7 @@ function measureString(string, ignoreEscape) {
 
   // Escape the string by entering it as
   // a text node to the DOM element
-  } else if (Em.typeOf(element.innerText) !== "undefined") {
+  } else if (Ember.typeOf(element.innerText) !== "undefined") {
     element.innerText = string;
   } else {
     element.textContent = string;
@@ -325,7 +325,7 @@ function measureString(string, ignoreEscape) {
   return layoutOf(element);
 };
 
-Em.Metrics = {
+Ember.Metrics = {
   prepareStringMeasurement:  prepareStringMeasurement,
   teardownStringMeasurement: teardownStringMeasurement,
   measureString:             measureString,
