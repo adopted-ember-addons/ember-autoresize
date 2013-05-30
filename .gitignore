@@ -1,0 +1,17 @@
+bin/
+.bundle
+bundle
+tmp/
+tests/source/
+dist/
+
+.DS_Store
+.project
+
+.github-upload-token
+
+tests/ember-resize-tests.js
+*gem
+
+docs/build/
+docs/node_modules/
