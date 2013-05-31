@@ -1,3 +1,19 @@
+var entityLookup = {
+  ' ': '&nbsp;',
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#x27;',
+  '/': '&#x2F;'
+};
+
+var escapeHTMLEntities = function (string) {
+  return ('' + string).replace(/[ &<>"'\/]/g, function (match) {
+    return entityLookup[match];
+  });
+};
+
 /**
   This mixin provides common functionality for automatically
   resizing view depending on the contents of the view. To
@@ -122,6 +138,16 @@ Ember.AutoResize = Ember.Mixin.create(/** @scope Ember.AutoResize.prototype */{
   autoResizeText: Ember.required(),
 
   /**
+    Whether HTML should be safely escaped before
+    being measured.
+
+    @property ignoreEscape
+    @default false
+    @type Boolean
+   */
+  ignoreEscape: false,
+
+  /**
     Schedule measuring the view's size.
     This happens automatically when the
     `autoResizeText` property changes.
@@ -166,7 +192,7 @@ Ember.AutoResize = Ember.Mixin.create(/** @scope Ember.AutoResize.prototype */{
       }
 
       Ember.Metrics.prepareStringMeasurement(this.$()[0], styles);
-      size = Ember.Metrics.measureString(text);
+      size = Ember.Metrics.measureString(text, this.get('ignoreEscape'));
       Ember.Metrics.teardownStringMeasurement();
     } else {
       size = { width: 0, height: 0 };
@@ -252,9 +278,21 @@ Ember.TextField.reopen(Ember.AutoResize, /** @scope Ember.TextField.prototype */
     resize their width.
 
     @property shouldResizeWidth
+    @default true
     @type Boolean
    */
   shouldResizeWidth: true,
+
+  /**
+    Don't escape HTML entities, since
+    we are converting spaces and other
+    strings into HTML characters.
+
+    @property ignoreEscape
+    @default true
+    @type Boolean
+   */
+  ignoreEscape: true,
 
   /**
     This provides a single character
@@ -265,7 +303,7 @@ Ember.TextField.reopen(Ember.AutoResize, /** @scope Ember.TextField.prototype */
     @type String
    */
   autoResizeText: function () {
-    var value = this.get('value');
+    var value = escapeHTMLEntities(this.get('value'));
     return Ember.isEmpty(value) ? '.' : value;
   }.property('value')
 
@@ -283,6 +321,17 @@ Ember.TextArea.reopen(Ember.AutoResize, /** @scope Ember.TextArea.prototype */{
   shouldResizeHeight: true,
 
   /**
+    Don't escape HTML entities, since
+    we are converting spaces and other
+    strings into HTML characters.
+
+    @property ignoreEscape
+    @default true
+    @type Boolean
+   */
+  ignoreEscape: true,
+
+  /**
     Optimistically resize the height
     of the textarea so when users reach
     the end of a line, they will be
@@ -292,7 +341,7 @@ Ember.TextArea.reopen(Ember.AutoResize, /** @scope Ember.TextArea.prototype */{
     @type String
    */
   autoResizeText: function () {
-    return this.get('value') + '@';
+    return escapeHTMLEntities(this.get('value')) + '@';
   }.property('value')
 
 });
