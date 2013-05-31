@@ -1,5 +1,3 @@
-(function () {
-
 var metricsCalculationElement = null,
     // A list of all of the style properties
     // to copy over to our example element
@@ -331,5 +329,3 @@ Ember.Metrics = {
   measureString:             measureString,
   layoutOf:                  layoutOf
 };
-
-}());

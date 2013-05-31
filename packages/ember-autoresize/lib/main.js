@@ -6,5 +6,5 @@
   @requires ember-views
  */
 
-require('ember-autoresize/system/string_measurment');
-require('ember-autoresize/mixins/autoresize');
+require('ember-autoresize/system');
+require('ember-autoresize/mixins');

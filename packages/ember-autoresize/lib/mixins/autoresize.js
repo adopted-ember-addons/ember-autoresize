@@ -1,3 +1,5 @@
+require('ember-autoresize/system/string_measurement');
+
 var entityLookup = {
   ' ': '&nbsp;',
   '&': '&amp;',
