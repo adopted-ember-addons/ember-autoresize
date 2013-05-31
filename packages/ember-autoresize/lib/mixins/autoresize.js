@@ -1,21 +1,5 @@
 require('ember-autoresize/system/string_measurement');
 
-var entityLookup = {
-  ' ': '&nbsp;',
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-  '"': '&quot;',
-  "'": '&#x27;',
-  '/': '&#x2F;'
-};
-
-var escapeHTMLEntities = function (string) {
-  return ('' + string).replace(/[ &<>"'\/]/g, function (match) {
-    return entityLookup[match];
-  });
-};
-
 /**
   This mixin provides common functionality for automatically
   resizing view depending on the contents of the view. To
@@ -140,14 +124,24 @@ Ember.AutoResize = Ember.Mixin.create(/** @scope Ember.AutoResize.prototype */{
   autoResizeText: Ember.required(),
 
   /**
-    Whether HTML should be safely escaped before
-    being measured.
+    Whether the autoResizeText has been sanitized
+    and should be treated as HTML.
 
     @property ignoreEscape
     @default false
     @type Boolean
    */
   ignoreEscape: false,
+
+  /**
+    Whether whitespace should be treated as significant
+    contrary to any styles on the view.
+
+    @property significantWhitespace
+    @default false
+    @type Boolean
+   */
+  significantWhitespace: false,
 
   /**
     Schedule measuring the view's size.
@@ -191,6 +185,12 @@ Ember.AutoResize = Ember.Mixin.create(/** @scope Ember.AutoResize.prototype */{
         }
       } else {
         styles.maxHeight = Ember.Metrics.layoutOf(element).height + "px";
+      }
+
+      // Force white-space to pre-wrap to make
+      // whitespace significant
+      if (this.get('significantWhitespace')) {
+        styles.whiteSpace = 'pre-wrap';
       }
 
       Ember.Metrics.prepareStringMeasurement(this.$()[0], styles);
@@ -286,15 +286,14 @@ Ember.TextField.reopen(Ember.AutoResize, /** @scope Ember.TextField.prototype */
   shouldResizeWidth: true,
 
   /**
-    Don't escape HTML entities, since
-    we are converting spaces and other
-    strings into HTML characters.
+    Whitespace should be treated as significant
+    for text fields.
 
-    @property ignoreEscape
+    @property significantWhitespace
     @default true
     @type Boolean
    */
-  ignoreEscape: true,
+  significantWhitespace: true,
 
   /**
     This provides a single character
@@ -305,7 +304,7 @@ Ember.TextField.reopen(Ember.AutoResize, /** @scope Ember.TextField.prototype */
     @type String
    */
   autoResizeText: function () {
-    var value = escapeHTMLEntities(this.get('value'));
+    var value = this.get('value');
     return Ember.isEmpty(value) ? '.' : value;
   }.property('value')
 
@@ -323,15 +322,14 @@ Ember.TextArea.reopen(Ember.AutoResize, /** @scope Ember.TextArea.prototype */{
   shouldResizeHeight: true,
 
   /**
-    Don't escape HTML entities, since
-    we are converting spaces and other
-    strings into HTML characters.
+    Whitespace should be treated as significant
+    for text areas.
 
-    @property ignoreEscape
+    @property significantWhitespace
     @default true
     @type Boolean
    */
-  ignoreEscape: true,
+  significantWhitespace: true,
 
   /**
     Optimistically resize the height
@@ -343,7 +341,7 @@ Ember.TextArea.reopen(Ember.AutoResize, /** @scope Ember.TextArea.prototype */{
     @type String
    */
   autoResizeText: function () {
-    return escapeHTMLEntities(this.get('value')) + '@';
+    return this.get('value') + '@';
   }.property('value')
 
 });
