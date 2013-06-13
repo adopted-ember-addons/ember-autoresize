@@ -12,6 +12,26 @@ Refresh your page, and you should see that when you type in your text field, it 
 
 To play with the mixin, look at our [demo](http://paddle8.github.io/ember-autoresize).
 
+### Building
+
+To build the library, clone the repository and run:
+
+```bash
+bundle
+rake dist
+```
+
+The built files will be located in the `/dist` directory.
+
+### Testing
+
+To test the library, clone the repository and run:
+
+```bash
+bundle
+rake test
+```
+
 ### Roadmap
 - Optimize style lookups
 - Font fitting
