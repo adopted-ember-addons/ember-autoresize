@@ -125,6 +125,7 @@ var normalizeMargin = function (margin) {
 
   @method layoutOf
   @for Ember.Metrics
+  @static
   @param element {DOMELement} The element to compute the layout of.
   @return {Object} Layout properties of the element
  */
@@ -222,6 +223,7 @@ function layoutOf(element) {
 
   @method prepareStringMeasurement
   @for Ember.Metrics
+  @static
   @param exampleElement {DOMElement}
     A DOM element to use as a template for measuring a string in.
   @param additionalStyles {Object}
@@ -290,6 +292,7 @@ function prepareStringMeasurement(exampleElement, additionalStyles) {
   setup in `prepareStringMeasurement`.
 
   @for Ember.Metrics
+  @static
   @method teardownStringMeasurement
  */
 function teardownStringMeasurement() {
@@ -301,6 +304,17 @@ function teardownStringMeasurement() {
   }
 };
 
+/**
+  Measures a string given the styles applied
+  when setting up string measurements.
+
+  @for Ember.Metrics
+  @static
+  @method measureString
+  @param string {String} The string to measure
+  @param ignoreEscape {Boolean} Whether the string should be escaped.
+  @return {Object} The layout of the string passed in.
+ */
 function measureString(string, ignoreEscape) {
   var element = metricsCalculationElement;
 

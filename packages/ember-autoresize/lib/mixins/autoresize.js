@@ -273,6 +273,11 @@ Ember.AutoResize = Ember.Mixin.create(/** @scope Ember.AutoResize.prototype */{
 
 });
 
+
+/**
+  @namespace Ember
+  @class TextField
+ */
 Ember.TextField.reopen(Ember.AutoResize, /** @scope Ember.TextField.prototype */{
 
   /**
@@ -310,6 +315,10 @@ Ember.TextField.reopen(Ember.AutoResize, /** @scope Ember.TextField.prototype */
 
 });
 
+/**
+  @namespace Ember
+  @class TextArea
+ */
 Ember.TextArea.reopen(Ember.AutoResize, /** @scope Ember.TextArea.prototype */{
 
   /**
