@@ -10,6 +10,8 @@ To enable autoresizing on an input, add the following to your handlebars:
 
 Refresh your page, and you should see that when you type in your text field, it automatically resizes to fit the text.
 
+To play with the mixin, look at our [demo](http://paddle8.github.io/ember-autoresize).
+
 ### Roadmap
 - Optimize style lookups
 - Font fitting
