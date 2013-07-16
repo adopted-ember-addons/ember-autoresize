@@ -165,7 +165,7 @@ Ember.AutoResize = Ember.Mixin.create(/** @scope Ember.AutoResize.prototype */{
     var text = this.get('autoResizeText'),
         size;
 
-    if (!Ember.isEmpty(text)) {
+    if (!Ember.isEmpty(text) && !this.get('isDestroying')) {
       // Provide extra styles that will restrict
       // width / height growth
       var styles  = {},
@@ -193,7 +193,7 @@ Ember.AutoResize = Ember.Mixin.create(/** @scope Ember.AutoResize.prototype */{
         styles.whiteSpace = 'pre-wrap';
       }
 
-      Ember.Metrics.prepareStringMeasurement(this.$()[0], styles);
+      Ember.Metrics.prepareStringMeasurement(element, styles);
       size = Ember.Metrics.measureString(text, this.get('ignoreEscape'));
       Ember.Metrics.teardownStringMeasurement();
     } else {
@@ -246,7 +246,7 @@ Ember.AutoResize = Ember.Mixin.create(/** @scope Ember.AutoResize.prototype */{
     this.set('dimensions', dimensions);
 
     if (layoutDidChange) {
-      Ember.run.schedule('render', this, this.dimensionsDidChange);
+      Ember.run.scheduleOnce('render', this, this.dimensionsDidChange);
     }
   }.observes('measuredSize'),
 
@@ -350,7 +350,11 @@ Ember.TextArea.reopen(Ember.AutoResize, /** @scope Ember.TextArea.prototype */{
     @type String
    */
   autoResizeText: function () {
-    return this.get('value') + '@';
+    var value = this.get('value');
+    if (Ember.isNone(value)) {
+      value = '';
+    }
+    return value + '@';
   }.property('value')
 
 });
