@@ -130,6 +130,49 @@ var normalizeMargin = function (margin) {
   @return {Object} Layout properties of the element
  */
 function layoutOf(element) {
+  // Handle window
+  if (element instanceof Window) {
+    var dimensions = {
+          width:  element.innerWidth,
+          height: element.innerHeight
+        },
+        dimensionsWithChrome = {
+          width:  element.outerWidth,
+          height: element.outerHeight
+        };
+
+    // IE<8 doesn't support window.innerWidth / window.outerWidth
+
+    return {
+      width:     element.innerWidth,
+      height:    element.innerHeight,
+      boxSizing: null,
+      content: innerDimensions,
+      borders: innerDimensions,
+      margins: {
+        width:  element.outerWidth,
+        height: element.outerHeight
+      }
+    };
+  }
+
+  // Handle document
+  if (element instanceof Document) {
+    var dimensions = {
+      width:  element.width,
+      height: element.height
+    };
+
+    return {
+      width:     element.innerWidth,
+      height:    element.innerHeight,
+      boxSizing: null,
+      content: dimensions,
+      borders: dimensions,
+      margins: dimensions
+    };
+  }
+
   var boxSizing = boxSizingOf(element),
       content = {
         width:  element.offsetWidth,
