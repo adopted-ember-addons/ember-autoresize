@@ -147,25 +147,32 @@ function layoutOf(element) {
       width:     element.innerWidth,
       height:    element.innerHeight,
       boxSizing: null,
-      content: innerDimensions,
-      borders: innerDimensions,
-      margins: {
-        width:  element.outerWidth,
-        height: element.outerHeight
-      }
+      content: dimensions,
+      borders: dimensions,
+      margins: dimensionsWithChrome
     };
   }
 
   // Handle document
-  if (element instanceof Document) {
+  if ((window.Document && element instanceof Document) || // Standards
+      element === document) {                             // old IE
     var dimensions = {
-      width:  element.width,
-      height: element.height
+      width:  Math.max(
+        element.body.scrollWidth, element.documentElement.scrollWidth,
+        element.body.offsetWidth, element.documentElement.offsetWidth,
+        element.body.clientWidth, element.documentElement.clientWidth
+      ),
+      height: Math.max(
+        element.body.scrollHeight, element.documentElement.scrollHeight,
+        element.body.offsetHeight, element.documentElement.offsetHeight,
+        element.body.clientHeight, element.documentElement.clientHeight
+      )
     };
 
+    // The document has no chrome
     return {
-      width:     element.innerWidth,
-      height:    element.innerHeight,
+      width:    dimensions.width,
+      height:   dimensions.height,
       boxSizing: null,
       content: dimensions,
       borders: dimensions,
