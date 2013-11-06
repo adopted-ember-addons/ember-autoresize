@@ -131,7 +131,8 @@ var normalizeMargin = function (margin) {
  */
 function layoutOf(element) {
   // Handle window
-  if (element instanceof Window) {
+  if ((window.Window && element instanceof Window) || // Standards
+      element === window) {                           // Safari 5.1
     var dimensions = {
           width:  element.innerWidth,
           height: element.innerHeight
