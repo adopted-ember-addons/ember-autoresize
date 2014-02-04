@@ -55,7 +55,7 @@ function computedStylesFor(element) {
   }
 
   return styles;
-};
+}
 
 /**
   Detect the browser's default box sizing.
@@ -130,17 +130,19 @@ var normalizeMargin = function (margin) {
   @return {Object} Layout properties of the element
  */
 function layoutOf(element) {
+  var dimensions;
+
   // Handle window
   if ((window.Window && element instanceof Window) || // Standards
       element === window) {                           // Safari 5.1
-    var dimensions = {
-          width:  element.innerWidth,
-          height: element.innerHeight
-        },
-        dimensionsWithChrome = {
-          width:  element.outerWidth,
-          height: element.outerHeight
-        };
+    dimensions = {
+      width:  element.innerWidth,
+      height: element.innerHeight
+    };
+    var dimensionsWithChrome = {
+      width:  element.outerWidth,
+      height: element.outerHeight
+    };
 
     // IE<8 doesn't support window.innerWidth / window.outerWidth
 
@@ -157,7 +159,7 @@ function layoutOf(element) {
   // Handle document
   if ((window.Document && element instanceof Document) || // Standards
       element === document) {                             // old IE
-    var dimensions = {
+    dimensions = {
       width:  Math.max(
         element.body.scrollWidth, element.documentElement.scrollWidth,
         element.body.offsetWidth, element.documentElement.offsetWidth,
@@ -267,7 +269,7 @@ function layoutOf(element) {
   layout.margins = margins;
 
   return layout;
-};
+}
 
 /**
   Prepare for measuring the layout of a string.
@@ -336,7 +338,7 @@ function prepareStringMeasurement(exampleElement, additionalStyles) {
     width:  "auto",
     height: "auto"
   }, additionalStyles);
-};
+}
 
 /**
   Cleanup properties used by `measureString`
@@ -353,7 +355,7 @@ function teardownStringMeasurement() {
     metricsCalculationElement.className = "";
     metricsCalculationElement.setAttribute('style', '');
   }
-};
+}
 
 /**
   Measures a string given the styles applied
@@ -386,7 +388,7 @@ function measureString(string, ignoreEscape) {
   element.style.overflow = 'hidden';
 
   return layoutOf(element);
-};
+}
 
 Ember.Metrics = {
   prepareStringMeasurement:  prepareStringMeasurement,

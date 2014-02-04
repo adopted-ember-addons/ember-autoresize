@@ -150,11 +150,11 @@ Ember.AutoResize = Ember.Mixin.create(/** @scope Ember.AutoResize.prototype */{
 
     @method scheduleMeasurement
    */
-  scheduleMeasurement: function () {
+  scheduleMeasurement: Ember.observer('autoresizeText', function () {
     if (this.get('autoresize')) {
       Ember.run.once(this, 'measureSize');
     }
-  }.observes('autoResizeText'),
+  }),
 
   /**
     Measures the size of the text of the element.
@@ -210,7 +210,7 @@ Ember.AutoResize = Ember.Mixin.create(/** @scope Ember.AutoResize.prototype */{
 
     @method measuredSizeDidChange
    */
-  measuredSizeDidChange: function () {
+  measuredSizeDidChange: Ember.observer('measuredSize', function () {
     var size      = this.get('measuredSize'),
         maxWidth  = this.get('maxWidth'),
         maxHeight = this.get('maxHeight'),
@@ -248,7 +248,7 @@ Ember.AutoResize = Ember.Mixin.create(/** @scope Ember.AutoResize.prototype */{
     if (layoutDidChange) {
       Ember.run.scheduleOnce('render', this, this.dimensionsDidChange);
     }
-  }.observes('measuredSize'),
+  }),
 
   /**
     Retiles the view at the end of the render queue.
@@ -308,10 +308,10 @@ Ember.TextField.reopen(Ember.AutoResize, /** @scope Ember.TextField.prototype */
     @property autoResizeText
     @type String
    */
-  autoResizeText: function () {
+  autoResizeText: Ember.computed('value', function () {
     var value = this.get('value');
     return Ember.isEmpty(value) ? '.' : value;
-  }.property('value')
+  })
 
 });
 
@@ -349,12 +349,12 @@ Ember.TextArea.reopen(Ember.AutoResize, /** @scope Ember.TextArea.prototype */{
     @property autoResizeText
     @type String
    */
-  autoResizeText: function () {
+  autoResizeText: Ember.computed('value', function () {
     var value = this.get('value');
     if (Ember.isNone(value)) {
       value = '';
     }
     return value + '@';
-  }.property('value')
+  })
 
 });

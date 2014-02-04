@@ -1,7 +1,7 @@
 instance_eval File.read(::EmberDev.support_path.join('Assetfile'))
 
 distros = {
-  :autoresize => %w(ember-autoresize)
+  "autoresize" => %w(ember-autoresize)
 }
 
 output "dist"
