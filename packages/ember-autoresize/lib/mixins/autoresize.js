@@ -265,6 +265,10 @@ Ember.AutoResize = Ember.Mixin.create(/** @scope Ember.AutoResize.prototype */{
       }
     }
 
+    if (this.get('maxHeight') == null) {
+      styles.overflow = 'hidden';
+    }
+
     var $element = this.$();
     if ($element) {
       $element.css(styles);
