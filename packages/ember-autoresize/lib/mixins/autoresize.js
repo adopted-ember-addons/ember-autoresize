@@ -150,7 +150,7 @@ Ember.AutoResize = Ember.Mixin.create(/** @scope Ember.AutoResize.prototype */{
 
     @method scheduleMeasurement
    */
-  scheduleMeasurement: Ember.observer('autoresizeText', function () {
+  scheduleMeasurement: Ember.observer('autoResizeText', function () {
     if (this.get('autoresize')) {
       Ember.run.once(this, 'measureSize');
     }
