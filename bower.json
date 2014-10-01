@@ -1,0 +1,22 @@
+{
+  "name": "ember-autoresize",
+  "version": "0.1.0",
+  "homepage": "https://github.com/paddle8/ember-autoresize",
+  "authors": [
+    "Tim Evans <tim.evans@paddle8.com>"
+  ],
+  "description": "autoresize capabilities for Ember",
+  "main": "dist/autoresize.js",
+  "keywords": [
+    "ember",
+    "autoresize"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
