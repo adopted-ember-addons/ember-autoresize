@@ -186,7 +186,7 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
         styles.whiteSpace = 'pre-wrap';
       }
 
-      measureText(text, styles, { template: element, escape: !get(this, 'ignoreEscape') });
+      size = measureText(text, styles, { template: element, escape: !get(this, 'ignoreEscape') });
     } else {
       size = { width: 0, height: 0 };
     }
@@ -239,7 +239,7 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
     if (layoutDidChange) {
       scheduleOnce('render', this, 'dimensionsDidChange');
     }
-  }),
+  }).on('didInsertElement'),
 
   /**
     Retiles the view at the end of the render queue.
