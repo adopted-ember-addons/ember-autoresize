@@ -1,1 +1,0 @@
-require('ember-autoresize/mixins/autoresize');
