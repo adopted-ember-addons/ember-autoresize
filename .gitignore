@@ -1,17 +1,18 @@
-bin/
-.bundle
-bundle
-tmp/
-tests/source/
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+/tmp
+
+# dependencies
+/node_modules
+/bower_components/*
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage/*
+/libpeerconnection.log
+npm-debug.log
+testem.log
 *~
-
-.DS_Store
-.project
-
-.github-upload-token
-
-tests/ember-resize-tests.js
-*gem
-
-docs/build/
-docs/node_modules/
