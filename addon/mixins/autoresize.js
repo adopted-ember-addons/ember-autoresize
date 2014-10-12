@@ -208,6 +208,8 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
     var layoutDidChange = false;
     var dimensions = {};
 
+    if (size == null) { return; }
+
     if (get(this, 'shouldResizeWidth')) {
       // Account for off-by-one error in FireFox
       // (specifically, input elements have 1px
