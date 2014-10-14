@@ -16,6 +16,7 @@ To play with the mixin, look at our [demo](http://paddle8.github.io/ember-autore
 
 ```bash
 npm install --save-dev ember-autoresize
+ember g ember-autoresize
 ```
 
 ### Roadmap
