@@ -1,4 +1,4 @@
-## Ember AutoResize
+## Ember AutoResize [![Code Climate](https://codeclimate.com/github/paddle8/ember-autoresize/badges/gpa.svg)](https://codeclimate.com/github/paddle8/ember-autoresize)
 
 Ember AutoResize is an ember-cli addon for providing autoresize functionality to Ember. This package provides the necessary bootstrapping for `{{input}}` and `{{textarea}}` components.
 
