@@ -182,7 +182,11 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
 
       // Handle 'rows' attribute on <textarea>s
       if (get(this, 'rows')) {
-        styles.minHeight = measureText("<br><br>", styles, { template: element, escape: false }).height + 'px';
+        var rows = '';
+        for (var i = 0, len = parseInt(get(this, 'rows'), 10); i < len; i++) {
+          rows += '<br>';
+        }
+        styles.minHeight = measureText(rows, styles, { template: element, escape: false }).height + 'px';
       }
 
       // Force white-space to pre-wrap to make
