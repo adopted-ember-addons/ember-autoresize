@@ -19,6 +19,7 @@ To play with the mixin, look at our [demo](http://paddle8.github.io/ember-autore
  max-width  | The max width of the resizeable element
  max-height | The max height of the resizeable element
  rows       | The minimum number of rows for an element (best used for textarea elements)
+ max-rows   | The maximum number of rows for an element (best used for textarea elements)
 
 ### Installation
 

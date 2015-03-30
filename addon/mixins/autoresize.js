@@ -181,13 +181,22 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
         styles.maxHeight = getLayout(element).height + "px";
       }
 
+      var measureRows = function (rows) {
+        var html = '';
+        for (var i = 0, len = parseInt(rows, 10); i < len; i++) {
+          html += '<br>';
+        }
+        return measureText(html, styles, { template: element, escape: false }).height;
+      };
+
       // Handle 'rows' attribute on <textarea>s
       if (get(this, 'rows')) {
-        var rows = '';
-        for (var i = 0, len = parseInt(get(this, 'rows'), 10); i < len; i++) {
-          rows += '<br>';
-        }
-        styles.minHeight = measureText(rows, styles, { template: element, escape: false }).height + 'px';
+        styles.minHeight = measureRows(get(this, 'rows')) + 'px';
+      }
+
+      // Handle 'max-rows' attribute on <textarea>s
+      if (get(this, 'max-rows') && get(this, 'maxHeight') == null) {
+        set(this, 'maxHeight', measureRows(get(this, 'rows')));
       }
 
       // Force white-space to pre-wrap to make
