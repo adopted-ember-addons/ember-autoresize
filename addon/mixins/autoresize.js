@@ -7,6 +7,7 @@ var scheduleOnce = Ember.run.scheduleOnce;
 var once = Ember.run.once;
 var keys = Ember.keys;
 var isEmpty = Ember.isEmpty;
+var alias = Ember.computed.alias;
 
 /**
   This mixin provides common functionality for automatically
@@ -91,7 +92,7 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
     @default null
     @type Number
    */
-  maxWidth: null,
+  maxWidth: alias('max-width'),
 
   /**
     If set, this property dictates how much
@@ -103,7 +104,7 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
     @default null
     @type Number
    */
-  maxHeight: null,
+  maxHeight: alias('max-width'),
 
   /**
     A required property that should alias the
