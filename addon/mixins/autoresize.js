@@ -49,7 +49,12 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
     @type Boolean
     @default false
    */
-  autoresize: false,
+  autoresize: function (key, value) {
+    if (typeof document === 'undefined') {
+      return false;
+    }
+    return value;
+  }.property(),
 
   /**
     The current dimensions of the view being
