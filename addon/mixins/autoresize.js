@@ -1,6 +1,22 @@
 import { getLayout, measureText } from "dom-ruler";
 import Ember from "ember";
 
+function fastbootSafeGetLayout() {
+  if (typeof(document) !== 'undefined') {
+    return getLayout.apply(this, arguments);
+  } else {
+    return { height: 0, width: 0}; // Can't measure in fastboot
+  }
+}
+
+function fastbootSafeMeasureText() {
+  if (typeof(document) !== 'undefined') {
+    return measureText.apply(this, arguments);
+  } else {
+    return { height: 0, width: 0}; // Can't measure in fastboot
+  }
+}
+
 var get = Ember.get;
 var set = Ember.set;
 var scheduleOnce = Ember.run.scheduleOnce;
@@ -175,7 +191,7 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
           styles.maxWidth = get(this, 'maxWidth') + "px";
         }
       } else {
-        styles.maxWidth = getLayout(element).width + "px";
+        styles.maxWidth = fastbootSafeGetLayout(element).width + "px";
       }
 
       if (get(this, 'shouldResizeHeight')) {
@@ -183,7 +199,7 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
           styles.maxHeight = get(this, 'maxHeight') + "px";
         }
       } else {
-        styles.maxHeight = getLayout(element).height + "px";
+        styles.maxHeight = fastbootSafeGetLayout(element).height + "px";
       }
 
       var measureRows = function (rows) {
@@ -191,7 +207,7 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
         for (var i = 0, len = parseInt(rows, 10); i < len; i++) {
           html += '<br>';
         }
-        return measureText(html, styles, { template: element, escape: false }).height;
+        return fastbootSafeMeasureText(html, styles, { template: element, escape: false }).height;
       };
 
       // Handle 'rows' attribute on <textarea>s
@@ -210,7 +226,7 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
         styles.whiteSpace = 'pre-wrap';
       }
 
-      size = measureText(text, styles, { template: element, escape: !get(this, 'ignoreEscape') });
+      size = fastbootSafeMeasureText(text, styles, { template: element, escape: !get(this, 'ignoreEscape') });
     } else {
       size = { width: 0, height: 0 };
     }
@@ -272,6 +288,7 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
     @method dimensionsDidChange
    */
   dimensionsDidChange: function () {
+    if (typeof(Ember.$) === 'undefined') { return; }
     var dimensions = get(this, 'dimensions');
     var styles = {};
 
