@@ -109,7 +109,7 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
     @default null
     @type Number
    */
-  maxHeight: alias('max-width'),
+  maxHeight: alias('max-height'),
 
   /**
     A required property that should alias the
@@ -201,7 +201,7 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
 
       // Handle 'max-rows' attribute on <textarea>s
       if (get(this, 'max-rows') && get(this, 'maxHeight') == null) {
-        set(this, 'maxHeight', measureRows(get(this, 'rows')));
+        set(this, 'maxHeight', measureRows(get(this, 'max-rows')));
       }
 
       // Force white-space to pre-wrap to make
