@@ -1,6 +1,10 @@
-## Ember AutoResize [![Ember Observer Score](http://emberobserver.com/badges/ember-autoresize.svg)](http://emberobserver.com/addons/ember-autoresize) [![Code Climate](https://codeclimate.com/github/paddle8/ember-autoresize/badges/gpa.svg)](https://codeclimate.com/github/paddle8/ember-autoresize)
+# Ember AutoResize [![Ember Observer Score](http://emberobserver.com/badges/ember-autoresize.svg)](http://emberobserver.com/addons/ember-autoresize) [![Code Climate](https://codeclimate.com/github/paddle8/ember-autoresize/badges/gpa.svg)](https://codeclimate.com/github/paddle8/ember-autoresize)
 
-Ember AutoResize is an ember-cli addon for providing autoresize functionality to Ember. This package provides the necessary bootstrapping for `{{input}}` and `{{textarea}}` components.
+Ember AutoResize is an Ember-CLI addon for providing autoresize functionality to Ember. This package currently provides the necessary bootstrapping for `{{input}}` and `{{textarea}}` components.
+
+To play with the addon, look at our [demo](http://paddle8.github.io/ember-autoresize). (Note: The demo is a bit out of date, check the documentation below for proper usage.)
+
+## Usage
 
 To enable autoresizing on an input, add the following to your handlebars:
 
@@ -10,25 +14,61 @@ To enable autoresizing on an input, add the following to your handlebars:
 
 Refresh your page, and you should see that when you type in your text field, it automatically resizes to fit the text.
 
-To play with the mixin, look at our [demo](http://paddle8.github.io/ember-autoresize).
+Textareas work exactly the same way:
+
+```handlebars
+{{textarea autoresize=true}}
+```
 
 ### Options
 
- Attribute  | Description
------------:|-----------------------------------------
- max-width  | The max width of the resizeable element
- max-height | The max height of the resizeable element
- rows       | The minimum number of rows for an element (best used for textarea elements)
- max-rows   | The maximum number of rows for an element (best used for textarea elements)
+#### max-width
 
-### Installation
+Set the maximum width (in px) of the resizeable element.
 
-```bash
-npm install --save-dev ember-autoresize
-ember g ember-autoresize
+```handlebars
+{{input 
+  autoresize=true 
+  max-width=200}}
 ```
 
-### Roadmap
+#### max-height
+
+Set the maximum width (in px) of the element.
+
+```handlebars
+{{input 
+  autoresize=true 
+  max-height=300}}
+```
+
+#### rows
+
+Set the minimum number of rows for the element.  Recommended for textareas.
+
+```handlebars
+{{textarea 
+  autoresize=true 
+  rows=2}}
+```
+
+#### max-rows
+
+Set the maximum number of rows for the element.  Recommended for textareas.
+
+```handlebars
+{{textarea 
+  autoresize=true 
+  max-rows=10}}
+```
+
+## Installation
+
+```bash
+ember install ember-autoresize
+```
+
+## Roadmap
 - Optimize style lookups
 - Font fitting
 - Clearer ways to enable autoresizing on templates

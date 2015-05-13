@@ -9,7 +9,8 @@
   "scripts": {
     "start": "ember server",
     "build": "ember build",
-    "test": "ember try:testall"
+    "test": "ember try:testall",
+    "postinstall": "ember g ember-autoresize"
   },
   "repository": "https://github.com/paddle8/ember-autoresize",
   "engines": {
