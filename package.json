@@ -9,8 +9,7 @@
   "scripts": {
     "start": "ember server",
     "build": "ember build",
-    "test": "ember try:testall",
-    "postinstall": "bower cache clean && bower install"
+    "test": "ember try:testall"
   },
   "repository": "https://github.com/paddle8/ember-autoresize",
   "engines": {
