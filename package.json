@@ -1,6 +1,6 @@
 {
   "name": "ember-autoresize",
-  "version": "0.4.0",
+  "version": "0.3.7",
   "description": "Ember-CLI addon for providing autoresize functionality",
   "directories": {
     "doc": "doc",
