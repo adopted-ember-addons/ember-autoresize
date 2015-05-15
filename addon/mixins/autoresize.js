@@ -1,13 +1,24 @@
 import { getLayout, measureText } from "dom-ruler";
 import Ember from "ember";
 
-var get = Ember.get;
-var set = Ember.set;
-var scheduleOnce = Ember.run.scheduleOnce;
-var once = Ember.run.once;
-var keys = Ember.keys;
-var isEmpty = Ember.isEmpty;
-var alias = Ember.computed.alias;
+const get = Ember.get;
+const set = Ember.set;
+const scheduleOnce = Ember.run.scheduleOnce;
+const once = Ember.run.once;
+const keys = Ember.keys;
+const isEmpty = Ember.isEmpty;
+const alias = Ember.computed.alias;
+const computed = Ember.computed;
+const observer = Ember.observer;
+const on = Ember.on;
+
+function withUnits(number) {
+  const unitlessNumber = parseInt(number + '', 10) + '';
+  if (unitlessNumber === number + '') {
+    return `number#{px}`;
+  }
+  return number;
+}
 
 /**
   This mixin provides common functionality for automatically
@@ -24,7 +35,7 @@ var alias = Ember.computed.alias;
   @extends Ember.Mixin
   @since Ember 1.0.0-rc3
  */
-var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
+export default Ember.Mixin.create(/** @scope AutoResize.prototype */{
 
   /**
     Add `ember-auto-resize` so additional
@@ -49,12 +60,12 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
     @type Boolean
     @default false
    */
-  autoresize: function (key, value) {
+  autoresize: computed(function (_, value) {
     if (typeof document === 'undefined') {
       return false;
     }
     return value;
-  }.property(),
+  }),
 
   /**
     The current dimensions of the view being
@@ -149,72 +160,89 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
 
     @method scheduleMeasurement
    */
-  scheduleMeasurement: Ember.observer('autoResizeText', function () {
+  scheduleMeasurement: on('init', observer('autoResizeText', function () {
     if (get(this, 'autoresize')) {
       once(this, 'measureSize');
     }
-  }).on('init'),
+  })),
 
   /**
     Measures the size of the text of the element.
 
     @method measureSize
    */
-  measureSize: function () {
-    var text = get(this, 'autoResizeText');
-    var size;
+  measureSize() {
+    const text = get(this, 'autoResizeText');
 
-    if (!isEmpty(text) && !get(this, 'isDestroying')) {
-      // Provide extra styles that will restrict
-      // width / height growth
-      var styles  = {};
-      var element = get(this, 'element');
-
-      if (get(this, 'shouldResizeWidth')) {
-        if (get(this, 'maxWidth') != null) {
-          styles.maxWidth = get(this, 'maxWidth') + "px";
-        }
-      } else {
-        styles.maxWidth = getLayout(element).width + "px";
-      }
-
-      if (get(this, 'shouldResizeHeight')) {
-        if (get(this, 'maxHeight') != null) {
-          styles.maxHeight = get(this, 'maxHeight') + "px";
-        }
-      } else {
-        styles.maxHeight = getLayout(element).height + "px";
-      }
-
-      var measureRows = function (rows) {
-        var html = '';
-        for (var i = 0, len = parseInt(rows, 10); i < len; i++) {
-          html += '<br>';
-        }
-        return measureText(html, styles, { template: element, escape: false }).height;
-      };
-
-      // Handle 'rows' attribute on <textarea>s
-      if (get(this, 'rows')) {
-        styles.minHeight = measureRows(get(this, 'rows')) + 'px';
-      }
-
-      // Handle 'max-rows' attribute on <textarea>s
-      if (get(this, 'max-rows') && get(this, 'maxHeight') == null) {
-        set(this, 'maxHeight', measureRows(get(this, 'max-rows')));
-      }
-
-      // Force white-space to pre-wrap to make
-      // whitespace significant
-      if (get(this, 'significantWhitespace')) {
-        styles.whiteSpace = 'pre-wrap';
-      }
-
-      size = measureText(text, styles, { template: element, escape: !get(this, 'ignoreEscape') });
-    } else {
-      size = { width: 0, height: 0 };
+    if (isEmpty(text) || get(this, 'isDestroying')) {
+      set(this, 'measuredSize', { width: 0, height: 0 });
     }
 
+    // Provide extra styles that will restrict
+    // width / height growth
+    const element = get(this, 'element');
+    var styles  = {};
+
+    if (get(this, 'shouldResizeWidth')) {
+      if (get(this, 'maxWidth') != null) {
+        styles.maxWidth = withUnits(get(this, 'maxWidth'));
+      }
+    } else {
+      styles.maxWidth = getLayout(element).width + 'px';
+    }
+
+    if (get(this, 'shouldResizeHeight')) {
+      if (get(this, 'maxHeight') != null) {
+        styles.maxHeight = withUnits(get(this, 'maxHeight'));
+      }
+    } else {
+      styles.maxHeight = getLayout(element).height + 'px';
+    }
+
+    function measureRows(rows) {
+      var html = '';
+      for (var i = 0, len = parseInt(rows, 10); i < len; i++) {
+        html += '<br>';
+      }
+      return measureText(html, styles, { template: element, escape: false }).height;
+    };
+
+    // Handle 'rows' attribute on <textarea>s
+    if (get(this, 'rows')) {
+      styles.minHeight = measureRows(get(this, 'rows')) + 'px';
+    }
+
+    // Handle 'max-rows' attribute on <textarea>s
+    if (get(this, 'max-rows') && get(this, 'maxHeight') == null) {
+      set(this, 'maxHeight', measureRows(get(this, 'max-rows')));
+      styles.maxHeight = get(this, 'maxHeight') + 'px';
+    }
+
+    // Force white-space to pre-wrap to make
+    // whitespace significant
+    if (get(this, 'significantWhitespace')) {
+      styles.whiteSpace = 'pre-wrap';
+    }
+
+    // Create a signature so we can cache the max width and height
+    const signature = styles.maxWidth + styles.maxHeight;
+    if (signature !== this._signature) {
+      const maxDimensions = measureText('', {
+        width: styles.maxWidth,
+        height: styles.maxHeight,
+      }, { template: element });
+      this._signature = signature;
+      this._maxWidth = maxDimensions.width;
+      this._maxHeight = maxDimensions.height;
+    }
+
+    const size = measureText(text, styles, {
+      template: element,
+      escape: !get(this, 'ignoreEscape'),
+    });
+
+    if (styles.maxWidth)  size.maxWidth = this._maxWidth;
+    if (styles.maxHeight) size.maxHeight = this._maxHeight;
     set(this, 'measuredSize', size);
   },
 
@@ -225,14 +253,13 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
 
     @method measuredSizeDidChange
    */
-  measuredSizeDidChange: Ember.observer('measuredSize', function () {
-    var size      = get(this, 'measuredSize');
-    var maxWidth  = get(this, 'maxWidth');
-    var maxHeight = get(this, 'maxHeight');
-    var layoutDidChange = false;
-    var dimensions = {};
-
+  measuredSizeDidChange: on('didInsertElement', observer('measuredSize', function () {
+    let size = get(this, 'measuredSize');
     if (size == null) { return; }
+
+    let { maxWidth, maxHeight } = size;
+    let layoutDidChange = false;
+    let dimensions = {};
 
     if (get(this, 'shouldResizeWidth')) {
       // Account for off-by-one error in FireFox
@@ -265,13 +292,13 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
     if (layoutDidChange) {
       scheduleOnce('render', this, 'dimensionsDidChange');
     }
-  }).on('didInsertElement'),
+  })),
 
   /**
     Retiles the view at the end of the render queue.
     @method dimensionsDidChange
    */
-  dimensionsDidChange: function () {
+  dimensionsDidChange() {
     var dimensions = get(this, 'dimensions');
     var styles = {};
 
@@ -290,5 +317,3 @@ var AutoResize = Ember.Mixin.create(/** @scope AutoResize.prototype */{
   }
 
 });
-
-export default AutoResize;

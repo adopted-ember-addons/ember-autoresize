@@ -24,32 +24,26 @@ Textareas work exactly the same way:
 
 #### max-width
 
-Set the maximum width (in px) of the resizeable element.
+Set the maximum width of the resizeable element. If no unit is provided, it assumes that it's in pixels.
 
 ```handlebars
-{{input 
-  autoresize=true 
-  max-width=200}}
+{{input autoresize=true max-width=200}}
 ```
 
 #### max-height
 
-Set the maximum width (in px) of the element.
+Set the maximum width of the element. If no unit is provided, it assumes that it's in pixels.
 
 ```handlebars
-{{input 
-  autoresize=true 
-  max-height=300}}
+{{input autoresize=true max-height=300}}
 ```
 
 #### rows
 
-Set the minimum number of rows for the element.  Recommended for textareas.
+Set the minimum number of rows for the element. Recommended for textareas.
 
 ```handlebars
-{{textarea 
-  autoresize=true 
-  rows=2}}
+{{textarea autoresize=true rows=2}}
 ```
 
 #### max-rows
@@ -57,9 +51,7 @@ Set the minimum number of rows for the element.  Recommended for textareas.
 Set the maximum number of rows for the element.  Recommended for textareas.
 
 ```handlebars
-{{textarea 
-  autoresize=true 
-  max-rows=10}}
+{{textarea autoresize=true max-rows=10}}
 ```
 
 ## Installation
