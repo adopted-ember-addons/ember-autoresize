@@ -205,7 +205,7 @@ export default Ember.Mixin.create(/** @scope AutoResize.prototype */{
         html += '<br>';
       }
       return measureText(html, styles, { template: element, escape: false }).height;
-    };
+    }
 
     // Handle 'rows' attribute on <textarea>s
     if (get(this, 'rows')) {
@@ -241,8 +241,8 @@ export default Ember.Mixin.create(/** @scope AutoResize.prototype */{
       escape: !get(this, 'ignoreEscape'),
     });
 
-    if (styles.maxWidth)  size.maxWidth = this._maxWidth;
-    if (styles.maxHeight) size.maxHeight = this._maxHeight;
+    if (styles.maxWidth)  { size.maxWidth = this._maxWidth; }
+    if (styles.maxHeight) { size.maxHeight = this._maxHeight; }
     set(this, 'measuredSize', size);
   },
 
