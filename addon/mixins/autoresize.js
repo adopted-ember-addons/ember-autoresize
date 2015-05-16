@@ -15,7 +15,7 @@ const on = Ember.on;
 function withUnits(number) {
   const unitlessNumber = parseInt(number + '', 10) + '';
   if (unitlessNumber === number + '') {
-    return `number#{px}`;
+    return `${number}px`;
   }
   return number;
 }
