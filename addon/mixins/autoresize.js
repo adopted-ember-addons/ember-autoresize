@@ -60,11 +60,14 @@ export default Ember.Mixin.create(/** @scope AutoResize.prototype */{
     @type Boolean
     @default false
    */
-  autoresize: computed(function (_, value) {
-    if (typeof document === 'undefined') {
-      return false;
+  autoresize: computed({
+    get() {},
+    set(_, value) {
+      if (typeof document === 'undefined') {
+        return false;
+      }
+      return value;
     }
-    return value;
   }),
 
   /**
