@@ -60,7 +60,6 @@ Set the maximum number of rows for the element.  Recommended for textareas.
 
 ```bash
 ember install ember-autoresize
-ember g ember-autoresize
 ```
 
 ## Roadmap
