@@ -1,47 +1,37 @@
-<h1>Auto (pixels)</h1>
-<p>
-  {{input autoresize=true max-width=220}}<br>
-  <input class="px-units" disabled/>
-  <br>
-  {{textarea autoresize=true max-height=150}}<textarea class="px-units" disabled></textarea>
-</p>
+<header>
+  <h1>ember-autoresize</h1>
+  <p>An ember-cli addon for autoresizing elements.</p>
+</header>
 
-<h1>Pixels</h1>
-<p>
-  {{input autoresize=true max-width='220px'}}<br>
-  <input class="px-units" disabled/>
-  <br>
-  {{textarea autoresize=true max-height='150px'}}<textarea class="px-units" disabled></textarea>
-</p>
+<section>
+  <h2>Installation</h2>
+  <pre>
+ember install ember-autoresize
+  </pre>
+</section>
 
-<h1>em</h1>
-<p>
-  {{input autoresize=true max-width='12em'}}<br>
-  <input class="em-units" disabled/>
-  <br>
-  {{textarea autoresize=true max-height='5em'}}<textarea class="em-units" disabled></textarea>
-</p>
+<section>
+  <h2>Usage</h2>
+  <p>To add autoresizing to an \{{input}}, set autoresize to true:</p>
+  <pre>
+\{{input type="text" autoresize=true}}
+  </pre>
+  <p>You may then specify the maximum width that the input may resize to by setting the max-width property.</p>
+</section>
 
-<h1>vw / vh</h1>
-<p>
-  {{input autoresize=true max-width='100vw'}}<br>
-  <input class="vw-units" disabled/>
-  <br>
-  {{textarea autoresize=true max-height='10vh'}}<textarea class="vh-units" disabled></textarea>
-</p>
-
-<h1>Inches</h1>
-<p>
-  {{input autoresize=true max-width='2in'}}<br>
-  <input class="in-units" disabled/>
-  <br>
-  {{textarea autoresize=true max-height='3in'}}<textarea class="in-units" disabled></textarea>
-</p>
-
-<h1>Centimeters</h1>
-<p>
-  {{input autoresize=true max-width='50mm'}}<br>
-  <input class="mm-units" disabled/>
-  <br>
-  {{textarea autoresize=true max-height='30mm'}}<textarea class="mm-units" disabled></textarea>
-</p>
+<section>
+  <h2>Usage</h2>
+  <p>To add autoresizing to an \{{input}}, set autoresize to true:</p>
+  <pre>
+&lt;label for="pie-name"&gt;Pie Name&lt;/label&gt;
+\{{input id="pie-name" value=name autoresize=true max-width=200}}
+&lt;br&gt;&lt;br&gt;
+&lt;label for="pie-recipe"&gt;Recipe&lt;/label&gt;
+\{{textarea id="pie-recipe" value=recipe autoresize=true max-rows=4}}
+  </pre>
+  <label for="pie-name">Pie Name</label>
+  {{input id="pie-name" value=name autoresize=true max-width=200}}
+  <br><br>
+  <label for="pie-recipe">Recipe</label>
+  {{textarea id="pie-recipe" value=recipe autoresize=true max-rows=4}}
+</section>
