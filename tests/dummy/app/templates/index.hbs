@@ -19,6 +19,7 @@
   <h2>Usage</h2>
   <p>To add autoresizing to an \{{input}}, set autoresize to true:</p>
   {{code-snippet name="example.hbs"}}
+  <form>
 {{! BEGIN-SNIPPET example}}
   <label for="pie-name">Pie Name</label>
   {{input id="pie-name" value=name autoresize=true max-width=200}}
@@ -26,4 +27,5 @@
   <label for="pie-recipe">Recipe</label>
   {{textarea id="pie-recipe" value=recipe autoresize=true max-rows=4}}
 {{! END-SNIPPET}}
+  </form>
 </section>

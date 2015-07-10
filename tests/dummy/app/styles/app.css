@@ -24,9 +24,16 @@ html, body {
   margin: 0;
 }
 
+header,
+section >:not(pre) {
+  padding: 0 20px;
+}
+
 .ember-text-area.ember-auto-resize {
   display: inline-block;
   vertical-align: top;
+  resize: none;
+  border: 1px solid #333;
 }
 
 input {
@@ -40,21 +47,6 @@ pre, pre.hljs {
   border-top: 1px solid #DEDEDE;
   border-bottom: 1px solid #DEDEDE;
   padding: 20px;
-}
-
-.handlebars .hljs-expression {
-  color: #333;
-}
-.handlebars .hljs-string,
-.xml .hljs-value {
-  color: #00BA67;
-}
-.xml .hljs-title {
-  color: #034ABC;
-}
-.handlebars .hljs-variable,
-.xml .hljs-attribute {
-  color: #333;
 }
 
 
