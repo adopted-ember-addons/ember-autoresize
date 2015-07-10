@@ -1,3 +1,25 @@
+@font-face {
+  font-family: 'OfficeCodePro';
+  src: url('/assets/fonts/OfficeCodePro-Regular.eot');
+  src: url('/assets/fonts/OfficeCodePro-Regular.eot') format('embedded-opentype'),
+    url('/assets/fonts/OfficeCodePro-Regular.woff') format('woff'),
+    url('/assets/fonts/OfficeCodePro-Regular.ttf') format('truetype'),
+    url('/assets/fonts/OfficeCodePro-Regular.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OfficeCodePro';
+  src: url('/assets/fonts/OfficeCodePro-Bold.eot');
+  src: url('/assets/fonts/OfficeCodePro-Bold.eot') format('embedded-opentype'),
+    url('/assets/fonts/OfficeCodePro-Bold.woff') format('woff'),
+    url('/assets/fonts/OfficeCodePro-Bold.ttf') format('truetype'),
+    url('/assets/fonts/OfficeCodePro-Bold.svg') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
 html, body {
   margin: 0;
 }
@@ -10,6 +32,31 @@ html, body {
 input {
   box-sizing: border-box;
 }
+
+pre, pre.hljs {
+  font-family: 'OfficeCodePro';
+  font-size: 14px;
+  background: #FAFAFA;
+  border-top: 1px solid #DEDEDE;
+  border-bottom: 1px solid #DEDEDE;
+  padding: 20px;
+}
+
+.handlebars .hljs-expression {
+  color: #333;
+}
+.handlebars .hljs-string,
+.xml .hljs-value {
+  color: #00BA67;
+}
+.xml .hljs-title {
+  color: #034ABC;
+}
+.handlebars .hljs-variable,
+.xml .hljs-attribute {
+  color: #333;
+}
+
 
 input.em-units,
 input.px-units,
@@ -61,4 +108,3 @@ textarea.in-units {
 textarea.mm-units {
   height: 30mm;
 }
-
