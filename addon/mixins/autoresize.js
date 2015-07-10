@@ -5,7 +5,6 @@ const get = Ember.get;
 const set = Ember.set;
 const scheduleOnce = Ember.run.scheduleOnce;
 const once = Ember.run.once;
-const keys = Ember.keys;
 const isEmpty = Ember.isEmpty;
 const alias = Ember.computed.alias;
 const computed = Ember.computed;
@@ -305,9 +304,10 @@ export default Ember.Mixin.create(/** @scope AutoResize.prototype */{
     var dimensions = get(this, 'dimensions');
     var styles = {};
 
-    keys(dimensions).forEach(function (key) {
+    for (let key in dimensions) {
+      if (!dimensions.hasOwnProperty(key)) { continue; }
       styles[key] = dimensions[key] + 'px';
-    });
+    }
 
     if (get(this, 'maxHeight') == null) {
       styles.overflow = 'hidden';
