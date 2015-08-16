@@ -35,12 +35,22 @@ Ember.TextField.reopen(AutoResize, /** @scope Ember.TextField.prototype */{
     so users can click into an empty
     text field without it being too small
 
+    If a placeholder is set,
+    it will be used instead.
+
     @property autoResizeText
     @type String
    */
-  autoResizeText: Ember.computed('value', function () {
-    var value = get(this, 'value');
-    return isEmpty(value) ? '.' : value;
-  })
+  autoResizeText: Ember.computed('value', 'placeholder',
+    function () {
+      var placeholder = get(this, 'placeholder');
+      var value = get(this, 'value');
 
+      if(isEmpty(value)){
+        return isEmpty(placeholder) ? '.' : placeholder;
+      }
+
+      return value;
+    }
+  )
 });
