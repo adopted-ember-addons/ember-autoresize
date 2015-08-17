@@ -38,12 +38,14 @@ Ember.TextArea.reopen(AutoResize, /** @scope Ember.TextArea.prototype */{
     @property autoResizeText
     @type String
    */
-  autoResizeText: Ember.computed('value', function () {
-    var value = get(this, 'value');
-    if (isNone(value)) {
-      value = '';
+  autoResizeText: Ember.computed('value', {
+    get() {
+      var value = get(this, 'value');
+      if (isNone(value)) {
+        value = '';
+      }
+      return value + '@';
     }
-    return value + '@';
   })
 
 });

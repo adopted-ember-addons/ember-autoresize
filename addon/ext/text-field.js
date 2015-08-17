@@ -41,16 +41,16 @@ Ember.TextField.reopen(AutoResize, /** @scope Ember.TextField.prototype */{
     @property autoResizeText
     @type String
    */
-  autoResizeText: Ember.computed('value', 'placeholder',
-    function () {
+  autoResizeText: Ember.computed('value', 'placeholder', {
+    get() {
       var placeholder = get(this, 'placeholder');
       var value = get(this, 'value');
 
-      if(isEmpty(value)){
+      if (isEmpty(value)) {
         return isEmpty(placeholder) ? '.' : placeholder;
       }
 
       return value;
     }
-  )
+  })
 });
