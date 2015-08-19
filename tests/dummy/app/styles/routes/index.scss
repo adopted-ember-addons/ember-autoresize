@@ -31,6 +31,11 @@
       background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
     }
   }
+
+  input, textarea {
+    font-family: Lato, Helvetica, 'Helvetica Neue', Arial;
+    font-size: 13px;
+  }
 }
 
 @media (max-width: 600px) {

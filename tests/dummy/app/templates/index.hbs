@@ -11,7 +11,7 @@
 
 <section>
   <h2>Installation</h2>
-  {{#console-window}}
+  {{#console-window class="console"}}
     <span class="ps1">$ </span>ember install ember-autoresize
   {{/console-window}}
 </section>
@@ -19,25 +19,26 @@
 <section>
   <h2>Usage</h2>
   <p>To add autoresizing to an \{{input}}, set autoresize to true:</p>
-  {{#console-window}}
-    {{code-snippet name="example.hbs"}}
-  {{/console-window}}
+  {{code-snippet name="example.hbs"}}
   <p>You may then specify the maximum width that the input may resize to by setting the max-width property.</p>
 </section>
 
 <section>
   <h2>Usage</h2>
   <p>To add autoresizing to an \{{input}}, set autoresize to true:</p>
-  {{#console-window}}
-    {{code-snippet name="example.hbs"}}
-  {{/console-window}}
+  {{code-snippet name="example.hbs"}}
+
+  {{#console-window title="Invoice"}}
   <form>
-{{! BEGIN-SNIPPET example}}
-  <label for="pie-name">Pie Name</label>
-  {{input id="pie-name" value=name autoresize=true max-width=200}}
-  <br><br>
-  <label for="pie-recipe">Recipe</label>
-  {{textarea id="pie-recipe" value=recipe autoresize=true max-rows=4}}
-{{! END-SNIPPET}}
+    <h2>Invoice #0002</h2>
+    {{! BEGIN-SNIPPET example}}
+    <label for="invoice-notes">Notes</label>
+    {{textarea id="invoice-notes" value=notes autoresize=true rows=4 max-rows=8}}
+    <hr>
+    
+    <label for="item-price">Price</label>
+    {{input id="item-price" placeholder="$0.00" value=price autoresize=true max-width=200}}
+    {{! END-SNIPPET}}
   </form>
+  {{/console-window}}
 </section>

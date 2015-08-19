@@ -1,6 +1,15 @@
 .console-window {
   margin: 0 auto;
   max-width: 500px;
+
+  &.console .console-window_content {
+    font-family: OfficeCodePro;
+    background: #EFEFEF;
+  }
+
+  border-radius: 5px 5px 0 0;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  margin-bottom: 50px;
 }
 
 .ps1 {
@@ -17,6 +26,8 @@
   text-align: center;
   height: 30px;
   border-radius: 5px 5px 0 0;
+  line-height: 30px;
+  text-shadow: 1px 1px 0 #FFF;
 
   .button {
     position: absolute;
@@ -43,8 +54,7 @@
 }
 
 .console-window_content {
-  background: #EFEFEF;
   min-height: 250px;
-  font-family: OfficeCodePro;
   padding: 20px;
+  overflow: auto;
 }

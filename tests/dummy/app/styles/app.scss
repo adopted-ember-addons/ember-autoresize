@@ -7,7 +7,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  font-family: 'Lato';
+  font-family: Lato, Helvetica, 'Helvetica Neue', Arial;
 }
 
 header {
@@ -45,13 +45,22 @@ header {
 section {
   max-width: 80%;
   margin: 0 auto;
+
+  & > h2 {
+    padding: 30px 0;
+    margin: 40px 0;
+  }
 }
 
 h2 {
+  padding-bottom: 30px;
   font-size: 1.2em;
   text-align: center;
-  padding: 30px 0;
-  margin: 40px 0;
+  border-bottom: 1px solid #D8D8D8;
+}
+
+hr {
+  border: 0;
   border-bottom: 1px solid #D8D8D8;
 }
 
