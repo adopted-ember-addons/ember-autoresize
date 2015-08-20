@@ -28,6 +28,7 @@
   border-radius: 5px 5px 0 0;
   line-height: 30px;
   text-shadow: 1px 1px 0 #FFF;
+  border-bottom: 1px solid #C8C8C8;
 
   .button {
     position: absolute;
@@ -39,16 +40,19 @@
 
   .close {
     background-color: #F84324;
+    border: 1px solid #C6351C;
     left: 10px;
   }
 
   .minimize {
     background-color: #FEBE04;
+    border: 1px solid #CB9803;
     left: 30px;
   }
 
   .maximize {
     background-color: #00BA67;
+    border: 1px solid #009452;
     left: 50px;
   }
 }
