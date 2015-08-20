@@ -1,10 +1,10 @@
-# Ember AutoResize [![Ember Observer Score](http://emberobserver.com/badges/ember-autoresize.svg)](http://emberobserver.com/addons/ember-autoresize) [![Code Climate](https://codeclimate.com/github/paddle8/ember-autoresize/badges/gpa.svg)](https://codeclimate.com/github/paddle8/ember-autoresize)
+# Ember AutoResize [![Ember Observer Score](http://emberobserver.com/badges/ember-autoresize.svg)](http://emberobserver.com/addons/ember-autoresize) [![Code Climate](https://codeclimate.com/github/tim-evans/ember-autoresize/badges/gpa.svg)](https://codeclimate.com/github/tim-evans/ember-autoresize)
 
 **Note: if you're using a version of Ember less than `1.12.0`, then please use `0.4.1` of this addon.**
 
 Ember AutoResize is an Ember-CLI addon for providing autoresize functionality to Ember. This package currently provides the necessary bootstrapping for `{{input}}` and `{{textarea}}` components.
 
-To play with the addon, look at our [demo](http://paddle8.github.io/ember-autoresize). (Note: The demo is a bit out of date, check the documentation below for proper usage.)
+To play with the addon, look at our [demo](http://tim-evans.github.io/ember-autoresize). (Note: The demo is a bit out of date, check the documentation below for proper usage.)
 
 ## Usage
 
