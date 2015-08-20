@@ -11,11 +11,11 @@
     "build": "ember build",
     "test": "ember try:testall"
   },
-  "repository": "https://github.com/paddle8/ember-autoresize",
+  "repository": "https://github.com/tim-evans/ember-autoresize",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "Tim Evans <tevans@movableink.com>",
+  "author": "Tim Evans <tim.c.evans@me.com>",
   "contributors": [
     {
       "name": "Jordan Hawker",
