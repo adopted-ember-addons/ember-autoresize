@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   title: '',
   classNames: ['window', 'editor'],
   text: Ember.computed('title', function () {
-    return snippets[get(this, 'title')]
+    return snippets[get(this, 'title')];
   }),
 
   lines: Ember.computed('text', function () {
