@@ -1,7 +1,8 @@
 import Ember from 'ember';
 
+const get = Ember.get;
+
 export default Ember.Component.extend({
-  title: '',
-  classNames: ['window', 'console'],
+  classNames: ['window', 'app'],
   layoutName: 'components/window'
 });

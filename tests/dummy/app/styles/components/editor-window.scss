@@ -1,0 +1,36 @@
+.window.editor {
+  max-width: 800px;
+
+  .window_content {
+    position: relative;
+    padding-left: 60px;
+  }
+
+  .gutter {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    border-right: 1px solid #E9E9E9;
+    background: #F9F9F9;
+  }
+
+  .line {
+    content: ' ';
+    position: relative;
+    min-width: 2px;
+  }
+
+  .line-number {
+    position: absolute;
+    left: -40px;
+    font-size: 16px;
+    font-family: OfficeCodePro;
+    color: #AAAAAA;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+  }
+}

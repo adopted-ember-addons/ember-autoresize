@@ -1,8 +1,13 @@
 @import 'fonts';
 @import 'colors';
+@import 'code';
+@import 'grid';
 @import 'routes/index';
-@import 'routes/test';
+@import 'components/window';
 @import 'components/console-window';
+@import 'components/editor-window';
+@import 'components/app-window';
+@import 'components/app-layer';
 
 html, body {
   margin: 0;
@@ -34,7 +39,8 @@ header {
       margin-left: 40px;
 
       transition: all 0.25s;
-      opacity: 0.9;
+      opacity: 0.7;
+
       &:hover {
         opacity: 1;
       }
@@ -52,6 +58,11 @@ section {
   }
 }
 
+p {
+  line-height: 1.5em;
+  padding-bottom: 1.5em;
+}
+
 h2 {
   padding-bottom: 30px;
   font-size: 1.2em;
@@ -64,16 +75,6 @@ hr {
   border-bottom: 1px solid #D8D8D8;
 }
 
-.ember-text-area.ember-auto-resize {
-  display: inline-block;
-  vertical-align: top;
-  resize: none;
-  border: 1px solid #333;
-}
-
-input {
-  box-sizing: border-box;
-}
 
 pre, pre.hljs {
   font-family: 'OfficeCodePro';
@@ -82,4 +83,11 @@ pre, pre.hljs {
   border-top: 1px solid #DEDEDE;
   border-bottom: 1px solid #DEDEDE;
   padding: 20px;
+}
+
+::selection {
+  background: #FF9A89;
+}
+::-moz-selection {
+  background: #FF9A89;
 }
