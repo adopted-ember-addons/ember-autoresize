@@ -16,6 +16,19 @@ export default Ember.Route.extend({
     };
   },
 
+  script: [
+
+  ],
+
+  sayThing() {
+    let model = this.modelFor(this.routeName);
+    let controller = this.controllerFor(this.routeName);
+    get(model, 'messages').pushObject({
+      from: 'tomster@emberjs.com',
+      text: 'Hi'
+    });
+  },
+
   actions: {
     sendChat(message) {
       let model = this.modelFor(this.routeName);
@@ -24,6 +37,11 @@ export default Ember.Route.extend({
         this.sanitizeMessage('tomster@emberjs.com', message)
       );
       set(controller, 'msg', '');
+      this.send('respond');
+    },
+
+    respond() {
+      Ember.run.debounce(this, 'sayThing', 1000);
     }
   }
 });
