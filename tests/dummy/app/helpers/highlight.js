@@ -17,8 +17,8 @@ export default Ember.Helper.helper(function (params) {
     return `{{${prefix}<span class="helper">${helper}</span>&nbsp;`;
   }).replace(/{{\/([a-z-]+)}}/g, function (_, helper) {
     return `{{/<span class="helper">${helper}</span>}}`;
-  }).replace(/[a-z]+\.[a-z]+/g, function (title) {
-    return '<span class="literal">' + title + '</span>';
+  }).replace(/([;{=])([a-z]+\.[a-z]+)([&}])/g, function (_, prefix, title, postfix) {
+    return `${prefix}<span class="literal">${title}</span>${postfix}`;
   }).replace(/=([a-zA-Z0-9]+)/g, function (_, title) {
     return '=<span class="literal">' + title + '</span>';
   }).replace(/&lt;([a-z1-6]+)&nbsp;/g, function (_, tag) {

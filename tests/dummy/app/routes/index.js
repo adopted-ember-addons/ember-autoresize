@@ -13,7 +13,7 @@ export default Ember.Route.extend({
     return {
       to,
       text: Ember.String.htmlSafe(message.replace(/\n/g, '<br>'))
-    }
+    };
   },
 
   actions: {
