@@ -42,3 +42,23 @@
   </form>
   {{/app-window}}
 </section>
+
+<section>
+  <h2>Usage</h2>
+  <p>To add autoresizing to an \{{textarea}}, set autoresize to true:</p>
+  {{editor-window title="chat.hbs"}}
+
+  {{#app-window title="tomster@emberjs.com" id="chat"}}
+    {{! BEGIN-SNIPPET chat}}
+    <ul>
+      {{#each model.messages as |message|}}
+        <li class="{{if message.to 'to' 'from'}}">{{message.text}}</li>
+      {{/each}}
+    </ul>
+    <form>
+      {{textarea value=msg autoresize=true max-rows=4 placeholder="Type to send a chat to tomster@emberjs.com"}}
+      <button {{action "sendChat" msg}}>Send</button>
+    </form>
+    {{! END-SNIPPET}}
+  {{/app-window}}
+</section>

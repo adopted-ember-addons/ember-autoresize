@@ -11,9 +11,11 @@ export default Ember.Component.extend({
   }),
 
   lines: Ember.computed('text', function () {
-    return get(this, 'text').split('\n').map(function (code, i) {
+    let lines = get(this, 'text').split('\n');
+    let start = lines[0].length - lines[0].trim().length;
+    return lines.map(function (code, i) {
       return {
-        code: code || '\n',
+        code: code.slice(start) || '\n',
         number: i + 1
       };
     });
