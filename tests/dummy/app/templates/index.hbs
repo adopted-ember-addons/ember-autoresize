@@ -52,7 +52,9 @@
     {{! BEGIN-SNIPPET chat}}
     <ul>
       {{#each model.messages as |message|}}
-        <li class="{{if message.to 'to' 'from'}}">{{message.text}}</li>
+        <li class="{{if message.to 'to' 'from'}}">
+          <span class="message">{{message.text}}</span>
+        </li>
       {{/each}}
     </ul>
     <form>
