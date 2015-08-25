@@ -5,14 +5,18 @@
     background: linear-gradient($ember, $accent-color);
     color: #FFF;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    height: 60vh;
+    overflow: hidden;
 
     p {
-      margin: 0 auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -60%);
+              transform: translate(-50%, -60%);
       line-height: 1.7em;
-      max-width: 500px;
+      width: 500px;
       text-align: center;
-      padding-top: 3em;
-      padding-bottom: 4em;
     }
 
     .ember-logo {
@@ -42,10 +46,47 @@
   #index .hero {
     font-size: 32px;
     p {
-      max-width: 360px;
+      width: 360px;
     }
     .ember-logo {
       height: 36px;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  #index .hero {
+    font-size: 28px;
+    p {
+      width: 340px;
+    }
+    .ember-logo {
+      height: 32px;
+    }
+  }
+}
+
+@media screen and (max-height: 400px) {
+  #index .hero {
+    font-size: 32px;
+    p {
+      width: 335px;
+    }
+    .ember-logo {
+      height: 36px;
+    }
+  }
+}
+
+@media screen and (max-width: 330px) {
+  #index .hero {
+    font-size: 28px;
+    height: calc(100vh - 84px);
+    p {
+      width: 100vw;
+    }
+    .ember-logo {
+      height: 32px;
     }
   }
 }

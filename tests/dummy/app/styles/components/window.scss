@@ -54,3 +54,9 @@
     display: block;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .window_content code {
+    font-size: 14px;
+  }
+}
