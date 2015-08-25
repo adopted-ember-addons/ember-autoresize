@@ -57,7 +57,13 @@
     }
 
     .message {
+      font-size: 14px;
       padding: 5px;
+      max-width: 400px;
+
+      img {
+        width: 100%;
+      }
     }
   }
 }

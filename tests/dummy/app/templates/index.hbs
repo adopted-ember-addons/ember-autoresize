@@ -26,12 +26,12 @@
 <section>
   <h2>Usage</h2>
   <p>To add autoresizing to an \{{input}}, set autoresize to true:</p>
-  {{editor-window title="invoice.hbs"}}
+  {{editor-window title="reciept.hbs"}}
 
-  {{#app-window title="Invoice"}}
+  {{#app-window title="Reciept"}}
   <form>
-    {{! BEGIN-SNIPPET invoice}}
-    <h2>Invoice #0002</h2>
+    {{! BEGIN-SNIPPET reciept}}
+    <h2>Ember.js</h2>
     <label for="invoice-notes">Notes</label>
     {{textarea id="invoice-notes" value=notes autoresize=true rows=4 max-rows=8}}
     <hr>
@@ -53,7 +53,7 @@
     <ul>
       {{#each model.messages as |message|}}
         <li class="{{if message.to 'to' 'from'}}">
-          <span class="message">{{message.text}}</span>
+          <span class="message">{{{message.text}}}</span>
         </li>
       {{/each}}
     </ul>

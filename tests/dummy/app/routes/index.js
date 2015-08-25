@@ -9,6 +9,10 @@ export default Ember.Route.extend({
     };
   },
 
+  afterModel(model, transition) {
+    transition.send('respond');
+  },
+
   sanitizeMessage(to, message) {
     return {
       to,
@@ -16,16 +20,19 @@ export default Ember.Route.extend({
     };
   },
 
+  position: -1,
   script: [
-
+    'Hi there!',
+    '<img src="http://cdn.inquisitr.com/wp-content/uploads/2014/07/tumblr_n8f4er3xus1ry46hlo1_r1_500.gif" />'
   ],
 
   sayThing() {
     let model = this.modelFor(this.routeName);
-    let controller = this.controllerFor(this.routeName);
+    let i = get(this, 'position');
+    set(this, 'position', i + 1);
     get(model, 'messages').pushObject({
       from: 'tomster@emberjs.com',
-      text: 'Hi'
+      text: this.script[get(this, 'position')] || "Shhh! I'm eating"
     });
   },
 
