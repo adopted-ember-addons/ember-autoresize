@@ -176,113 +176,65 @@ function highlightHtml(statement) {
   return ast.value;
 }
 
-function highlightMustache(statement) {
+function highlightDirective(statement) {
   let nodes = [];
+
+  let opening = '?';
+  let closing = '?';
   switch (statement.type) {
-  case 'BooleanLiteral':
-    nodes.push({
-      type: 'hbs-bool',
-      value: statement.value.toString()
-    });
-    break;
-  case 'StringLiteral':
-    nodes.push({
-      type: 'hbs-string',
-      value: '"' + statement.value + '"'
-    });
-    break;
-  case 'NumberLiteral':
-    nodes.push({
-      type: 'hbs-number',
-      value: statement.value.toString()
-    });
-    break;
-  case 'PathExpression':
-    nodes.push({
-      type: 'hbs-path',
-      value: statement.parts.join('.')
-    });
+  case 'SubExpression':
+    opening = '(';
+    closing = ')';
     break;
   case 'MustacheStatement':
-    nodes.push({
-      type: 'text',
-      value: '{{'
-    });
+    opening = '{{';
+    closing = '}}';
+    break;
+  case 'BlockStatement':
+    let whitespace = (new Array(statement.loc.start.column + 1)).join(' ');
+    opening = `${whitespace}{{`;
+    closing = `}}`;
+    break;
+  }
 
+  nodes.push({
+    type: 'text',
+    value: opening
+  });
+
+  let path = statement.path.parts.join('.');
+  let hasBlock = statement.program;
+  let hasBlockParams = hasBlock && statement.program.blockParams;
+  let hasParams = statement.params.length ||
+                  statement.hash ||
+                  hasBlockParams;
+
+  if (statement.program) {
     nodes.push({
       type: 'hbs-directive',
-      value: statement.path.parts.join('')
+      value: `#${path}`
     });
 
-    if (statement.params.length ||
-        statement.hash) {
+    if (hasParams) {
       nodes.push({
         type: 'text',
         value: ' '
       });
     }
-
-    if (statement.params.length) {
-      statement.params.forEach(function (param) {
-        nodes.push.apply(nodes, highlightMustache(param));
-        nodes.push({
-          type: 'text',
-          value: ' '
-        });
-      });
-      nodes.pop();
-    }
-
-    if (statement.hash) {
-      statement.hash.pairs.forEach(function (pair) {
-        nodes.push({
-          type: 'hbs-key',
-          value: pair.key
-        });
-        nodes.push({
-          type: 'text',
-          value: '='
-        });
-        nodes.push.apply(nodes, highlightMustache(pair.value));
-        nodes.push({
-          type: 'text',
-          value: ' '
-        });
-      });
-      nodes.pop();
-    }
-
+  } else if (hasParams) {
     nodes.push({
-      type: 'text',
-      value: '}}'
+      type: 'hbs-directive',
+      value: path
     });
-    break;
-  default:
-    console.log(statement.type);
-    break;
-  }
-  return nodes;
-}
 
-function highlightBlock(statement) {
-  let nodes = [];
-  let whitespace = (new Array(statement.loc.start.column + 1)).join(' ');
-
-  nodes.push({
-    type: 'text',
-    value: `${whitespace}{{`
-  });
-
-  nodes.push({
-    type: 'hbs-directive',
-    value: '#' + statement.path.parts.join('')
-  });
-
-  if (statement.params.length ||
-      statement.hash) {
     nodes.push({
       type: 'text',
       value: ' '
+    });
+  } else {
+    nodes.push({
+      type: 'hbs-path',
+      value: path
     });
   }
 
@@ -316,7 +268,7 @@ function highlightBlock(statement) {
     nodes.pop();
   }
 
-  if (statement.program.blockParams) {
+  if (hasBlockParams) {
     nodes.push({
       type: 'hbs-keyword',
       value: ' as '
@@ -344,64 +296,101 @@ function highlightBlock(statement) {
 
   nodes.push({
     type: 'text',
-    value: '}}\n'
+    value: closing
   });
 
-  nodes.push.apply(nodes, highlight(statement.program));
+  if (hasBlock) {
+    nodes.push({
+      type: 'text',
+      value: '\n'
+    });
 
-  nodes.push({
-    type: 'text',
-    value: `${whitespace}{{`
-  });
+    nodes.push.apply(nodes, highlightProgram(statement.program));
 
-  nodes.push({
-    type: 'hbs-directive',
-    value: '/' + statement.path.parts.join('')
-  });
+    nodes.push({
+      type: 'text',
+      value: opening
+    });
 
-  nodes.push({
-    type: 'text',
-    value: '}}\n'
-  });
+    nodes.push({
+      type: 'hbs-directive',
+      value: '/' + statement.path.parts.join('.')
+    });
+
+    nodes.push({
+      type: 'text',
+      value: '}}\n'
+    });
+  }
 
   return nodes;
 }
 
-function highlight(program) {
-  var text = [];
+function highlightMustache(statement) {
+  let nodes = [];
+  switch (statement.type) {
+  case 'ContentStatement':
+    nodes.push.apply(nodes, highlightHtml(statement));
+    break;
+  case 'BooleanLiteral':
+    nodes.push({
+      type: 'hbs-bool',
+      value: statement.value.toString()
+    });
+    break;
+  case 'StringLiteral':
+    nodes.push({
+      type: 'hbs-string',
+      value: '"' + statement.value + '"'
+    });
+    break;
+  case 'NumberLiteral':
+    nodes.push({
+      type: 'hbs-number',
+      value: statement.value.toString()
+    });
+    break;
+  case 'PathExpression':
+    nodes.push({
+      type: 'hbs-path',
+      value: statement.parts.join('.')
+    });
+    break;
+  case 'SubExpression':
+  case 'MustacheStatement':
+  case 'BlockStatement':
+    nodes.push.apply(nodes, highlightDirective(statement));
+    break;
+  case 'CommentStatement':
+    let whitespace = new Array(statement.loc.start.column + 1).join(' ');
+    nodes.push({
+      type: 'text',
+      value: whitespace
+    });
+    nodes.push({
+      type: 'comment',
+      value: `{{! ${statement.value} }}`
+    });
+    nodes.push({
+      type: 'text',
+      value: '\n'
+    });
+    break;
+  default:
+    console.log(statement.type);
+    break;
+  }
+  return nodes;
+}
+
+function highlightProgram(program) {
+  var nodes = [];
   program.body.forEach(function (statement) {
-    switch (statement.type) {
-    case 'ContentStatement':
-      text.push.apply(text, highlightHtml(statement));
-      break;
-    case 'MustacheStatement':
-      text.push.apply(text, highlightMustache(statement));
-      break;
-    case 'BlockStatement':
-      text.push.apply(text, highlightBlock(statement));
-      break;
-    case 'CommentStatement':
-      let whitespace = new Array(statement.loc.start.column + 1).join(' ');
-      text.push({
-        type: 'text',
-        value: whitespace
-      });
-      text.push({
-        type: 'comment',
-        value: `{{! ${statement.value} }}`
-      });
-      text.push({
-        type: 'text',
-        value: '\n'
-      });
-      break;
-    default:
-      console.log(statement.type);
-    }
+    nodes.push.apply(nodes, highlightMustache(statement));
   });
-  return text;
+  return nodes;
 }
 
 export default function (string) {
-  return highlight(Handlebars.parse(string));
+  return highlightProgram(Handlebars.parse(string));
 }
