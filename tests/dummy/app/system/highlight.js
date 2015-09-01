@@ -30,8 +30,7 @@ Reader.prototype.until = function (str, inclusive=true) {
   let start = this.index;
   let end = this.text.indexOf(str, start);
   if (end === -1) {
-    console.log(this.text);
-    throw new Error('no ending');
+    throw new Error('Cannot find "' + str + '"');
   }
 
   if (inclusive) {
@@ -89,7 +88,6 @@ AST.prototype.push = function (string) {
 function highlightHtml(statement) {
   let reader = new Reader(statement.value);
   let ast = new AST(reader);
-  console.log(statement.value);
   ast.start('text');
 
   while (reader.peek()) {
@@ -100,19 +98,21 @@ function highlightHtml(statement) {
         break;
       }
 
-      ast.readUntil('<', true);
+      ast.readUntil('<', false);
 
       // Comments
       if (reader.peek(4) === '<!--') {
         ast.end('text');
         ast.start('comment');
-        ast.push(reader.until('-->'));
+        ast.readUntil('-->');
         ast.end('comment');
+        ast.start('text');
       } else if (reader.peek() === '/') {
-        ast.push(reader.read());
+        ast.push(reader.read(2));
         ast.end('text');
         ast.start('tag');
       } else {
+        ast.push(reader.read());
         ast.end('text');
         ast.start('tag');
       }
@@ -259,13 +259,14 @@ function highlightMustache(statement) {
     break;
   default:
     console.log(statement.type);
+    break;
   }
   return nodes;
 }
 
 function highlightBlock(statement) {
   let nodes = [];
-  let whitespace = (new Array(statement.loc.start.column)).join(' ');
+  let whitespace = (new Array(statement.loc.start.column + 1)).join(' ');
 
   nodes.push({
     type: 'text',
@@ -379,8 +380,23 @@ function highlight(program) {
     case 'BlockStatement':
       text.push.apply(text, highlightBlock(statement));
       break;
-    default:
+    case 'CommentStatement':
+      let whitespace = new Array(statement.loc.start.column + 1).join(' ');
+      text.push({
+        type: 'text',
+        value: whitespace
+      });
+      text.push({
+        type: 'comment',
+        value: `{{! ${statement.value} }}`
+      });
+      text.push({
+        type: 'text',
+        value: '\n'
+      });
       break;
+    default:
+      console.log(statement.type);
     }
   });
   return text;
