@@ -9,22 +9,22 @@ function Reader(text) {
 Reader.prototype.peek = function (count=1) {
   let start = this.index;
   return this.text.slice(start, start + count);
-}
+};
 
 Reader.prototype.read = function (count=1) {
   let start = this.index;
   this.index = start + count;
   return this.text.slice(start, start + count);
-}
+};
 
 Reader.prototype.has = function (str) {
   return this.text.indexOf(str, this.index) !== -1;
-}
+};
 
 Reader.prototype.rest = function () {
   this.index = this.text.length;
   return this.text.slice(this.index);
-}
+};
 
 Reader.prototype.until = function (str, inclusive=true) {
   let start = this.index;
@@ -40,7 +40,7 @@ Reader.prototype.until = function (str, inclusive=true) {
 
   this.index = end;
   return this.text.slice(start, end);
-}
+};
 
 function AST(reader) {
   this.reader = reader;
@@ -50,11 +50,11 @@ function AST(reader) {
 AST.prototype.start = function (type) {
   this.currentType = type;
   this.buffer = [];
-}
+};
 
 AST.prototype.finish = function () {
   this.end(this.currentType);
-}
+};
 
 AST.prototype.end = function (type) {
   if (this.currentType === type) {
@@ -68,28 +68,28 @@ AST.prototype.end = function (type) {
   } else {
     throw new Error('unmatched end ' + this.currentType + ' != ' + type);
   }
-}
+};
 
 AST.prototype.readUntil = function (chr, inclusive=true) {
   this.push(this.reader.until(chr, inclusive));
-}
+};
 
 AST.prototype.readWhitespace = function () {
   let chr = this.reader.peek();
-  while (chr === ' ' || chr === '\n') {
+  while (/\s/.test(chr)) {
     this.push(this.reader.read());
     chr = this.reader.peek();
   }
-}
+};
 
 AST.prototype.push = function (string) {
   this.buffer.push(string);
-}
+};
 
 function highlightHtml(statement) {
   let reader = new Reader(statement.value);
   let ast = new AST(reader);
-
+  console.log(statement.value);
   ast.start('text');
 
   while (reader.peek()) {
@@ -125,9 +125,12 @@ function highlightHtml(statement) {
       ast.readWhitespace();
       ast.end('tag');
 
-      if (reader.peek(2) === '/>' ||
-          reader.peek() === '>') {
+      if (reader.peek(2) === '/>') {
         ast.start('text');
+        ast.readUntil('/>');
+      } else if (reader.peek() === '>') {
+        ast.start('text');
+        ast.readUntil('>');
       } else {
         ast.start('attr-key');
       }
@@ -137,6 +140,7 @@ function highlightHtml(statement) {
       ast.end('attr');
       if (reader.peek() === '>') {
         ast.start('text');
+        ast.readUntil('>');
       } else {
         ast.start('attr-key');
       }
@@ -261,9 +265,11 @@ function highlightMustache(statement) {
 
 function highlightBlock(statement) {
   let nodes = [];
+  let whitespace = (new Array(statement.loc.start.column)).join(' ');
+
   nodes.push({
     type: 'text',
-    value: '{{'
+    value: `${whitespace}{{`
   });
 
   nodes.push({
@@ -328,6 +334,7 @@ function highlightBlock(statement) {
         value: ' '
       });
     });
+    nodes.pop();
     nodes.push({
       type: 'text',
       value: '|'
@@ -336,14 +343,14 @@ function highlightBlock(statement) {
 
   nodes.push({
     type: 'text',
-    value: '}}'
+    value: '}}\n'
   });
 
   nodes.push.apply(nodes, highlight(statement.program));
 
   nodes.push({
     type: 'text',
-    value: '{{'
+    value: `${whitespace}{{`
   });
 
   nodes.push({
@@ -353,13 +360,13 @@ function highlightBlock(statement) {
 
   nodes.push({
     type: 'text',
-    value: '}}'
+    value: '}}\n'
   });
 
   return nodes;
 }
 
-function highlight(program, text) {
+function highlight(program) {
   var text = [];
   program.body.forEach(function (statement) {
     switch (statement.type) {
@@ -373,7 +380,6 @@ function highlight(program, text) {
       text.push.apply(text, highlightBlock(statement));
       break;
     default:
-      console.log(statement.type);
       break;
     }
   });

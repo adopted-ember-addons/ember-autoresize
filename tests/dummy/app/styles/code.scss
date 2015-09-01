@@ -1,6 +1,7 @@
 code {
   font-family: OfficeCodePro;
   font-size: 15px;
+  white-space: nowrap;
 
   &.inline {
     border: 1px solid #DDD;
@@ -8,19 +9,26 @@ code {
     padding: 0 4px;
   }
 
-  .helper {
+  .tag,
+  .hbs-directive {
     color: $green;
   }
 
-  .string {
+  .hbs-string {
     color: $red;
   }
 
-  .literal {
+  .attr-value,
+  .hbs-block-param,
+  .hbs-path,
+  .hbs-number,
+  .hbs-bool {
     color: $blue;
   }
 
-  .attribute {
+  .attr-key,
+  .hbs-keyword,
+  .hbs-key {
     color: $pink;
   }
 }

@@ -5,9 +5,14 @@
   {{title}}
 </div>
 <div class="window_content">
-  <div class="gutter"></div>
-  <div class="line">
-    <span class="line-number">{{line.number}}</span>
-    <code>{{highlight text}}</code>
-  </div>
+  <ul class="gutter">
+    {{#each lines as |line|}}
+      <li>{{line.number}}</li>
+    {{/each}}
+  </ul>
+  <code>
+    {{~#each lines as |line|~}}
+      {{line.code}}
+    {{~/each~}}
+  </code>
 </div>
