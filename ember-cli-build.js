@@ -11,6 +11,14 @@ module.exports = function(defaults) {
     snippetPaths: ['tests/dummy/snippets']
   });
 
+  app.import('bower_components/handlebars/handlebars.amd.js', {
+    exports: {
+      'handlebars': [
+        'default'
+      ]
+    }
+  });
+
   /*
     This build file specifes the options for the dummy test app of this
     addon, located in `/tests/dummy`

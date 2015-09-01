@@ -6,10 +6,8 @@
 </div>
 <div class="window_content">
   <div class="gutter"></div>
-  {{#each lines as |line|}}
-    <div class="line">
-      <span class="line-number">{{line.number}}</span>
-      <code>{{highlight line.code}}</code>
-    </div>
-  {{/each}}
+  <div class="line">
+    <span class="line-number">{{line.number}}</span>
+    <code>{{highlight text}}</code>
+  </div>
 </div>
