@@ -326,59 +326,69 @@ function highlightDirective(statement) {
   return nodes;
 }
 
-function highlightMustache(statement) {
-  let nodes = [];
-  switch (statement.type) {
-  case 'ContentStatement':
-    nodes.push.apply(nodes, highlightHtml(statement));
-    break;
-  case 'BooleanLiteral':
-    nodes.push({
+
+let highlighter = {
+  ContentStatement(statement) {
+    return highlightHtml(statement);
+  },
+
+  BooleanLiteral(statement) {
+    return {
       type: 'hbs-bool',
       value: statement.value.toString()
-    });
-    break;
-  case 'StringLiteral':
-    nodes.push({
+    };
+  },
+
+  StringLiteral(statement) {
+    return {
       type: 'hbs-string',
       value: '"' + statement.value + '"'
-    });
-    break;
-  case 'NumberLiteral':
-    nodes.push({
+    };
+  },
+
+  NumberLiteral(statement) {
+    return {
       type: 'hbs-number',
       value: statement.value.toString()
-    });
-    break;
-  case 'PathExpression':
-    nodes.push({
+    };
+  },
+
+  PathExpression(statement) {
+    return {
       type: 'hbs-path',
       value: statement.parts.join('.')
-    });
-    break;
-  case 'SubExpression':
-  case 'MustacheStatement':
-  case 'BlockStatement':
-    nodes.push.apply(nodes, highlightDirective(statement));
-    break;
-  case 'CommentStatement':
-    let whitespace = new Array(statement.loc.start.column + 1).join(' ');
-    nodes.push({
+    };
+  },
+
+  CommentStatement(statement) {
+    return [{
       type: 'text',
-      value: whitespace
-    });
-    nodes.push({
+      value: statement.leadingWhitespace
+    }, {
       type: 'comment',
       value: `{{! ${statement.value} }}`
-    });
-    nodes.push({
+    }, {
       type: 'text',
       value: '\n'
-    });
-    break;
-  default:
-    console.log(statement.type);
-    break;
+    }];
+  },
+
+  SubExpression: highlightDirective,
+  MustacheStatement: highlightDirective,
+  BlockStatement: highlightDirective
+};
+
+function highlightMustache(statement) {
+  let nodes = [];
+  let whitespace = new Array(statement.loc.start.column + 1).join(' ');
+  statement.leadingWhitespace = whitespace;
+
+  let fn = highlighter[statement.type];
+  let node = fn(statement);
+  if (node.length == null) {
+    nodes.push(node);
+  } else {
+    nodes.push.apply(nodes, node);
   }
   return nodes;
 }
