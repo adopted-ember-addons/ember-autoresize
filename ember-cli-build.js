@@ -8,7 +8,12 @@ module.exports = function(defaults) {
       prepend: '/ember-autoresize/'
     },
     snippetSearchPaths: ['tests/dummy/app'],
-    snippetPaths: ['tests/dummy/snippets']
+    snippetPaths: ['tests/dummy/snippets'],
+    svg: {
+      paths: [
+        'tests/dummy/public/assets/images'
+      ]
+    }
   });
 
   app.import('bower_components/handlebars/handlebars.amd.js', {
