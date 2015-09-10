@@ -66,3 +66,11 @@ ember install ember-autoresize
 - Optimize style lookups
 - Font fitting
 - Clearer ways to enable autoresizing on templates
+
+### Publishing Documentation
+
+To publish documentation (under the tests/dummy directory) run the following command:
+
+```bash
+npm run-script publish-docs
+```
