@@ -1,5 +1,6 @@
-import { getLayout, measureText } from "dom-ruler";
 import Ember from "ember";
+import { getStyles, getLayout, measureText } from "dom-ruler";
+import fontLoaded from "../system/font-loaded";
 
 const get = Ember.get;
 const set = Ember.set;
@@ -10,6 +11,7 @@ const alias = Ember.computed.alias;
 const computed = Ember.computed;
 const observer = Ember.observer;
 const on = Ember.on;
+const trim = Ember.$.trim;
 
 function withUnits(number) {
   const unitlessNumber = parseInt(number + '', 10) + '';
@@ -167,6 +169,22 @@ export default Ember.Mixin.create(/** @scope AutoResize.prototype */{
       once(this, 'measureSize');
     }
   })),
+
+  /**
+    Detect when a font is loaded and resize the box.
+
+    @private
+    @method fontFamilyLoaded
+   */
+  fontFamilyLoaded: on('didInsertElement', function () {
+    let styles = getStyles(get(this, 'element'));
+    let fontFamilies = styles.fontFamily.split(',');
+    Ember.A(fontFamilies).forEach((fontFamily) => {
+      fontLoaded(trim(fontFamily)).then(() => {
+        this.scheduleMeasurement();
+      }, function () {});
+    });
+  }),
 
   /**
     Measures the size of the text of the element.
