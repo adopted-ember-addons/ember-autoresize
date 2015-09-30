@@ -39,7 +39,7 @@ function getReferenceSize() {
 function checkIfFontLoaded(fontFamily, options, resolve, reject) {
   let blankSize = getReferenceSize();
   let size = measureText(SPECIMEN, {
-    "font-family": `"${fontFamily}", "AdobeBlank"`
+    "font-family": `${fontFamily}, "AdobeBlank"`
   }, {});
 
   if (size.width !== blankSize.width &&
