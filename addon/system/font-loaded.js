@@ -42,9 +42,8 @@ function checkIfFontLoaded(fontFamily, options, resolve, reject) {
     "font-family": `${fontFamily}, "AdobeBlank"`
   }, {});
 
-  if (size.width !== blankSize.width &&
+  if (size.width !== blankSize.width ||
       size.height !== blankSize.height) {
-    console.log(blankSize, size);
     resolve();
   } else if (options.timeout <= 0) {
     reject();
