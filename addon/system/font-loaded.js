@@ -11,12 +11,18 @@ function injectAdobeBlank() {
   }
 
   const element = document.createElement('style');
-  const head = document.getElementsByTagName('head')[0] ||
-               document.documentElement;
-  element.type = 'text/css';
-  head.appendChild(element);
+  const parent = document.head || document.body;
+  parent.appendChild(element);
 
-  sheet = document.styleSheets[document.styleSheets.length - 1];
+  // Find the stylesheet object created by the DOM element
+  for (var i = document.styleSheets.length - 1; i >= 0; i--) {
+    let stylesheet = document.styleSheets[i];
+    if (stylesheet.ownerNode === element) {
+      sheet = stylesheet;
+      break;
+    }
+  }
+
   if (sheet.insertRule) {
     sheet.insertRule(`@font-face { ${adobeBlank} }`, 0);
   } else {
