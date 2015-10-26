@@ -2,7 +2,7 @@ import Ember from 'ember';
 import adobeBlank from './adobe-blank';
 import { measureText } from "dom-ruler";
 
-const { RSVP } = Ember;
+const { RSVP, run } = Ember;
 
 var sheet;
 function injectAdobeBlank() {
@@ -67,7 +67,7 @@ export default function (fontFamily, options={ timeout: 3000 }) {
 
   if (loadedFonts[fontFamily] == null) {
     loadedFonts[fontFamily] = new RSVP.Promise(function (resolve, reject) {
-      checkIfFontLoaded(fontFamily, Ember.copy(options, true), resolve, reject);
+      checkIfFontLoaded(fontFamily, Ember.copy(options, true), run.bind(resolve), run.bind(reject));
     });
   }
 
