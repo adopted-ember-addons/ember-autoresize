@@ -4,16 +4,7 @@ import { measureText } from "dom-ruler";
 
 const { RSVP, run } = Ember;
 
-var sheet;
-function injectAdobeBlank() {
-  if (sheet) {
-    return sheet;
-  }
-
-  const element = document.createElement('style');
-  const parent = document.head || document.body;
-  parent.appendChild(element);
-
+function injectAdobeBlankToElement(element) {
   // Find the stylesheet object created by the DOM element
   for (var i = document.styleSheets.length - 1; i >= 0; i--) {
     let stylesheet = document.styleSheets[i];
@@ -23,11 +14,43 @@ function injectAdobeBlank() {
     }
   }
 
+  if (!sheet) {
+    return false;
+  }
+
   if (sheet.insertRule) {
     sheet.insertRule(`@font-face { ${adobeBlank} }`, 0);
   } else {
     sheet.addRule('@font-face', adobeBlank, 0);
   }
+}
+
+var _injectAdobeBlankPromise;
+function injectAdobeBlank() {
+  if (!_injectAdobeBlankPromise) {
+    _injectAdobeBlankPromise = new RSVP.Promise(function(resolve, reject) {
+      const element = document.createElement('style');
+      const parent = document.head || document.body;
+      parent.appendChild(element);
+
+      // Under memory pressure or in some other cases Chrome may not update
+      // the document.styleSheets property synchronously. Here we poll to
+      // be sure it has updated.
+      //
+      // See: https://github.com/tim-evans/ember-autoresize/issues/27
+      //
+      function checkInjection() {
+        let injected = injectAdobeBlankToElement(element);
+        if (injected) {
+          run(null, resolve);
+        } else {
+          window.setTimeout(checkInjection, 0);
+        }
+      }
+      checkInjection();
+    });
+  }
+  return _injectAdobeBlankPromise;
 }
 
 const SPECIMEN = " !\"\\#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~";
@@ -63,11 +86,11 @@ function checkIfFontLoaded(fontFamily, options, resolve, reject) {
 
 var loadedFonts = {};
 export default function (fontFamily, options={ timeout: 3000 }) {
-  injectAdobeBlank();
-
   if (loadedFonts[fontFamily] == null) {
-    loadedFonts[fontFamily] = new RSVP.Promise(function (resolve, reject) {
-      checkIfFontLoaded(fontFamily, Ember.copy(options, true), run.bind(resolve), run.bind(reject));
+    loadedFonts[fontFamily] = injectAdobeBlank().then(function() {
+      return new RSVP.Promise(function (resolve, reject) {
+        checkIfFontLoaded(fontFamily, Ember.copy(options, true), run.bind(resolve), run.bind(reject));
+      });
     });
   }
 
