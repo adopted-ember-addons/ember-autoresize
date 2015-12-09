@@ -5,6 +5,7 @@ import { measureText } from "dom-ruler";
 const { RSVP, run } = Ember;
 
 function injectAdobeBlankToElement(element) {
+  var sheet;
   // Find the stylesheet object created by the DOM element
   for (var i = document.styleSheets.length - 1; i >= 0; i--) {
     let stylesheet = document.styleSheets[i];
@@ -28,7 +29,7 @@ function injectAdobeBlankToElement(element) {
 var _injectAdobeBlankPromise;
 function injectAdobeBlank() {
   if (!_injectAdobeBlankPromise) {
-    _injectAdobeBlankPromise = new RSVP.Promise(function(resolve, reject) {
+    _injectAdobeBlankPromise = new RSVP.Promise(function(resolve) {
       const element = document.createElement('style');
       const parent = document.head || document.body;
       parent.appendChild(element);
