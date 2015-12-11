@@ -24,6 +24,7 @@ function injectAdobeBlankToElement(element) {
   } else {
     sheet.addRule('@font-face', adobeBlank, 0);
   }
+  return true;
 }
 
 var _injectAdobeBlankPromise;
