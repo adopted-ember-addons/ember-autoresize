@@ -11,7 +11,12 @@ const alias = Ember.computed.alias;
 const computed = Ember.computed;
 const observer = Ember.observer;
 const on = Ember.on;
-const trim = Ember.$.trim;
+
+// jQuery is not loaded in fastboot
+let trim = Ember.K;
+if (Ember.$) {
+  trim = Ember.$.trim;
+}
 
 function withUnits(number) {
   const unitlessNumber = parseInt(number + '', 10) + '';
