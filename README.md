@@ -56,6 +56,14 @@ Set the maximum number of rows for the element.  Recommended for textareas.
 {{textarea autoresize=true max-rows=10}}
 ```
 
+#### autoResizeText
+
+Optimistically resize the height of the textarea so when users reach the end of a line, they will be presented with space to begin typing. Defaults to `true`.
+
+```handlebars
+{{textarea autoresize=true autoResizeText=false}}
+```
+
 ## Installation
 
 ```bash
