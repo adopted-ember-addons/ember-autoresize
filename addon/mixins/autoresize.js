@@ -19,7 +19,7 @@ if (Ember.$) {
 }
 
 function withUnits(number) {
-  const unitlessNumber = parseInt(number + '', 10) + '';
+  const unitlessNumber = parseFloat(number + '', 10) + '';
   if (unitlessNumber === number + '') {
     return `${number}px`;
   }
