@@ -197,6 +197,9 @@ export default Ember.Mixin.create(/** @scope AutoResize.prototype */{
     @method measureSize
    */
   measureSize() {
+    const element = get(this, 'element');
+    if (element == null) { return; }
+
     const text = get(this, 'autoResizeText');
 
     if (isEmpty(text) || get(this, 'isDestroying')) {
@@ -205,7 +208,6 @@ export default Ember.Mixin.create(/** @scope AutoResize.prototype */{
 
     // Provide extra styles that will restrict
     // width / height growth
-    const element = get(this, 'element');
     var styles  = {};
 
     if (get(this, 'shouldResizeWidth')) {
