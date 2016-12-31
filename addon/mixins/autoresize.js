@@ -13,7 +13,7 @@ const observer = Ember.observer;
 const on = Ember.on;
 
 // jQuery is not loaded in fastboot
-let trim = Ember.K;
+let trim = function() {};
 if (Ember.$) {
   trim = Ember.$.trim;
 }
