@@ -170,7 +170,7 @@ export default Ember.Mixin.create(/** @scope AutoResize.prototype */{
     @method scheduleMeasurement
    */
   scheduleMeasurement: on('init', observer('autoResizeText', function () {
-    if (get(this, 'autoresize')) {
+    if (get(this, 'autoresize') && !get(this, 'isDestroyed')) {
       once(this, 'measureSize');
     }
   })),
