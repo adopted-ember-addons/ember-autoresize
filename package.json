@@ -1,6 +1,6 @@
 {
   "name": "ember-autoresize",
-  "version": "0.5.19",
+  "version": "0.5.20",
   "description": "An ember for providing autoresizing components (includes {{input}} and {{textarea}} autoresizing out of the box)",
   "directories": {
     "doc": "doc",
