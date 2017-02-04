@@ -1,4 +1,5 @@
 import Ember from "ember";
+import $ from "jquery";
 import { getStyles, getLayout, measureText } from "dom-ruler";
 import fontLoaded from "../system/font-loaded";
 
@@ -74,6 +75,26 @@ export default Ember.Mixin.create(/** @scope AutoResize.prototype */{
       }
       return value;
     }
+  }),
+
+  /**
+    The DOM element that should be targeted
+    for autoresizing. This defaults to the
+    component's element, but may be used
+    to autoresize a child element in cases
+    where you may be using raw HTML elements.
+
+    This element *must* be observable to trigger
+    proper resizing.
+
+    @property autoresizeElement
+    @default element
+    @type DOMElement
+   */
+  autoresizeElement: null,
+
+  autoresizeElementDidChange: on('didInsertElement', function () {
+    set(this, 'autoresizeElement', get(this, 'element'));
   }),
 
   /**
@@ -181,8 +202,8 @@ export default Ember.Mixin.create(/** @scope AutoResize.prototype */{
     @private
     @method fontFamilyLoaded
    */
-  fontFamilyLoaded: on('didInsertElement', function () {
-    let styles = getStyles(get(this, 'element'));
+  fontFamilyLoaded: observer('autoresizeElement', function () {
+    let styles = getStyles(get(this, 'autoresizeElement'));
     let fontFamilies = styles.fontFamily.split(',');
     Ember.A(fontFamilies).forEach((fontFamily) => {
       fontLoaded(trim(fontFamily)).then(() => {
@@ -197,7 +218,7 @@ export default Ember.Mixin.create(/** @scope AutoResize.prototype */{
     @method measureSize
    */
   measureSize() {
-    const element = get(this, 'element');
+    const element = get(this, 'autoresizeElement');
     if (element == null) { return; }
 
     const text = get(this, 'autoResizeText');
@@ -280,7 +301,7 @@ export default Ember.Mixin.create(/** @scope AutoResize.prototype */{
 
     @method measuredSizeDidChange
    */
-  measuredSizeDidChange: on('didInsertElement', observer('measuredSize', function () {
+  measuredSizeDidChange: observer('measuredSize', 'autoresizeElement', function () {
     let size = get(this, 'measuredSize');
     if (size == null) { return; }
 
@@ -338,7 +359,7 @@ export default Ember.Mixin.create(/** @scope AutoResize.prototype */{
       styles.overflow = 'hidden';
     }
 
-    var $element = this.$();
+    var $element = $(get(this, 'autoresizeElement'));
     if ($element) {
       $element.css(styles);
     }

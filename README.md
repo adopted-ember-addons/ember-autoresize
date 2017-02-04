@@ -56,6 +56,19 @@ Set the maximum number of rows for the element.  Recommended for textareas.
 {{textarea autoresize=true max-rows=10}}
 ```
 
+If you are making custom inputs using raw DOM elements, you can still use autoresize
+by specifying a custom `autoresizeElement` when you mixin the autoresize to your component.
+
+```js
+import Ember from 'ember';
+
+export default Ember.Component.extend({
+  autoresizeElementDidChange: on('didInsertElement', function () {
+    set(this, 'autoresizeElement', this.$('input')[0]);
+  })
+});
+```
+
 ## Installation
 
 ```bash
