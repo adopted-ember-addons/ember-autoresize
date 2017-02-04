@@ -52,7 +52,7 @@
     "autoresize"
   ],
   "dependencies": {
-    "dom-ruler": "^0.2.4",
+    "dom-ruler": "^0.2.5",
     "ember-cli-babel": "^5.1.7",
     "ember-cli-node-assets": "^0.1.6"
   },
