@@ -340,7 +340,7 @@ export default Ember.Mixin.create(/** @scope AutoResize.prototype */{
     if (layoutDidChange) {
       scheduleOnce('render', this, 'dimensionsDidChange');
     }
-  })),
+  }),
 
   /**
     Retiles the view at the end of the render queue.

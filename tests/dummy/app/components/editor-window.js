@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import snippets from '../snippets';
-import highlight from '../system/highlight';
 
 const { htmlSafe } = Ember.String;
 const { get } = Ember;
@@ -13,16 +12,7 @@ export default Ember.Component.extend({
   }),
 
   formattedText: Ember.computed('text', function () {
-    let statements = highlight(get(this, 'text'));
-
-    return statements.map(function (statement) {
-      let html = statement.value.replace(/>/g, '&gt;')
-                                .replace(/</g, '&lt;');
-      if (statement.type === 'text') {
-        return html;
-      }
-      return `<span class="${statement.type}">${html}</span>`;
-    }).join('');
+    return get(this, 'text');
   }),
 
   lines: Ember.computed('formattedText', function () {

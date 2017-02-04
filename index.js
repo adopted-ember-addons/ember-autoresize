@@ -3,12 +3,18 @@
 
 module.exports = {
   name: 'ember-autoresize',
-  included: function (app) {
-    app.options.snippetSearchPaths = ['tests/dummy/app'];
-    app.options.snippetPaths = ['tests/dummy/snippets'];
+  options: {
+    nodeAssets: {
+      'dom-ruler': {
+        srcDir: 'dist/amd',
+        import: ['dom-ruler.js']
+      }
+    }
+  },
 
-    this._super.included(app);
-    app.import('bower_components/dom-ruler/dist/amd/dom-ruler.js', {
+  included: function (app) {
+    this._super.included.apply(this, arguments);
+    app.import('vendor/dom-ruler/dom-ruler.js', {
       exports: {
         'dom-ruler': ['default']
       }
