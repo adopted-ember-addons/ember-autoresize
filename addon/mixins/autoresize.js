@@ -1,23 +1,24 @@
 import Ember from "ember";
-import $ from "jquery";
 import { getStyles, getLayout, measureText } from "dom-ruler";
 import fontLoaded from "../system/font-loaded";
 
-const get = Ember.get;
-const set = Ember.set;
-const scheduleOnce = Ember.run.scheduleOnce;
-const once = Ember.run.once;
-const isEmpty = Ember.isEmpty;
-const alias = Ember.computed.alias;
-const computed = Ember.computed;
-const observer = Ember.observer;
-const on = Ember.on;
+const {
+  get,
+  set,
+  run: { scheduleOnce, once },
+  isEmpty,
+  computed,
+  computed: { alias },
+  observer,
+  on
+} = Ember;
 
 // jQuery is not loaded in fastboot
-let trim = function() {};
-if (Ember.$) {
-  trim = Ember.$.trim;
-}
+let trim = function(str) {
+  if (str !== null && str !== undefined) {
+    return str.trim();
+  }
+};
 
 function withUnits(number) {
   const unitlessNumber = parseFloat(number + '', 10) + '';
@@ -358,11 +359,11 @@ export default Ember.Mixin.create(/** @scope AutoResize.prototype */{
     if (get(this, 'maxHeight') == null) {
       styles.overflow = 'hidden';
     }
-
-    var $element = $(get(this, 'autoresizeElement'));
-    if ($element) {
-      $element.css(styles);
+    var element = get(this, 'autoresizeElement');
+    if (element) {
+      for(let prop in styles) {
+        element.style[prop] = styles[prop];
+      }
     }
   }
-
 });

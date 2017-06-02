@@ -3,9 +3,12 @@
 var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
-  var app = new EmberAddon(defaults, {
-    // Add options here
-  });
+  var project = defaults.project;
+  var options = {};
+  if (project.findAddonByName('ember-native-dom-event-dispatcher')) {
+    options.vendorFiles = { 'jquery.js': null };
+  }
+  var app = new EmberAddon(defaults, options);
 
   /*
     This build file specifies the options for the dummy test app of this
