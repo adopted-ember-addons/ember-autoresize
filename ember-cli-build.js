@@ -8,7 +8,20 @@ module.exports = function(defaults) {
   if (project.findAddonByName('ember-native-dom-event-dispatcher')) {
     options.vendorFiles = { 'jquery.js': null };
   }
-  var app = new EmberAddon(defaults, options);
+  var app = new EmberAddon(defaults, options, {
+    // Add options here
+    fingerprint: {
+      extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'eot', 'ttf', 'woff', 'woff2', 'svg'],
+      prepend: '/ember-autoresize/'
+    },
+    sassOptions: {
+      includePaths: ['tests/dummy/app']
+    },
+    svgJar: {
+      strategy: 'inline',
+      sourceDirs: ['tests/dummy/public/assets/images']
+    }
+  });
 
   /*
     This build file specifies the options for the dummy test app of this
