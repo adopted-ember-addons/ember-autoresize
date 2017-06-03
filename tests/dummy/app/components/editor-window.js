@@ -16,7 +16,8 @@ export default Ember.Component.extend({
   }),
 
   lines: Ember.computed('formattedText', function () {
-    let lines = get(this, 'formattedText').split('\n');
+    let formattedText = get(this, 'formattedText');
+    let lines = formattedText ? formattedText.split('\n') : [''];
     let start = lines[0].length - lines[0].trim().length;
     return lines.map(function (code, i) {
       return {
