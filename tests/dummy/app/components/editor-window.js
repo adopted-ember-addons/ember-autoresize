@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import snippets from '../snippets';
 
 const { htmlSafe } = Ember.String;
 const { get } = Ember;

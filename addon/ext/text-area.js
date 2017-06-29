@@ -5,16 +5,15 @@ var get = Ember.get;
 var isNone = Ember.isNone;
 
 /**
-  @namespace Ember
-  @class TextArea
+  @element text-area
  */
-Ember.TextArea.reopen(AutoResize, /** @scope Ember.TextArea.prototype */{
+Ember.TextArea.reopen(AutoResize, {
 
   /**
     By default, textareas only resize
     their height.
 
-    @property shouldResizeHeight
+    @attribute shouldResizeHeight
     @type Boolean
    */
   shouldResizeHeight: true,
@@ -23,7 +22,7 @@ Ember.TextArea.reopen(AutoResize, /** @scope Ember.TextArea.prototype */{
     Whitespace should be treated as significant
     for text areas.
 
-    @property significantWhitespace
+    @attribute significantWhitespace
     @default true
     @type Boolean
    */
@@ -35,7 +34,7 @@ Ember.TextArea.reopen(AutoResize, /** @scope Ember.TextArea.prototype */{
     the end of a line, they will be
     presented with space to begin typing.
 
-    @property autoResizeText
+    @attribute autoResizeText
     @type String
    */
   autoResizeText: Ember.computed('value', {

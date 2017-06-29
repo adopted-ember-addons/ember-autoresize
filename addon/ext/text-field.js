@@ -5,16 +5,15 @@ var get = Ember.get;
 var isEmpty = Ember.isEmpty;
 
 /**
-  @namespace Ember
-  @class TextField
+  @element input
  */
-Ember.TextField.reopen(AutoResize, /** @scope Ember.TextField.prototype */{
+Ember.TextField.reopen(AutoResize, {
 
   /**
     By default, text fields only
     resize their width.
 
-    @property shouldResizeWidth
+    @attribute shouldResizeWidth
     @default true
     @type Boolean
    */
@@ -24,7 +23,7 @@ Ember.TextField.reopen(AutoResize, /** @scope Ember.TextField.prototype */{
     Whitespace should be treated as significant
     for text fields.
 
-    @property significantWhitespace
+    @attribute significantWhitespace
     @default true
     @type Boolean
    */
@@ -38,7 +37,7 @@ Ember.TextField.reopen(AutoResize, /** @scope Ember.TextField.prototype */{
     If a placeholder is set,
     it will be used instead.
 
-    @property autoResizeText
+    @attribute autoResizeText
     @type String
    */
   autoResizeText: Ember.computed('value', 'placeholder', {

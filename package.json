@@ -12,9 +12,6 @@
     "test": "ember try:each"
   },
   "repository": "https://github.com/tim-evans/ember-autoresize",
-  "engines": {
-    "node": ">= 0.12.0"
-  },
   "author": "Tim Evans <tim.c.evans@me.com>",
   "contributors": [
     {
@@ -24,6 +21,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "addon-docs": "tim-evans/addon-docs",
     "broccoli-asset-rev": "^2.4.5",
     "ember-cli": "2.13.3",
     "ember-cli-app-version": "^3.0.0",
@@ -38,8 +36,8 @@
     "ember-cli-shims": "^1.0.2",
     "ember-cli-test-loader": "^2.1.0",
     "ember-cli-uglify": "^1.2.0",
-    "ember-code-snippet": "^1.8.0",
     "ember-disable-prototype-extensions": "^1.1.0",
+    "ember-engines": "^0.5.8",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
     "ember-native-dom-event-dispatcher": "^0.6.1",
@@ -57,6 +55,9 @@
     "dom-ruler": "^0.2.5",
     "ember-cli-babel": "^5.1.7",
     "ember-cli-node-assets": "^0.2.2"
+  },
+  "engines": {
+    "node": "^4.5 || 6.* || >= 7.*"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"

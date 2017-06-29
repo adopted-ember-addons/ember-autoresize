@@ -43,7 +43,7 @@ function withUnits(number) {
   @extends Ember.Mixin
   @since Ember 1.0.0-rc3
  */
-export default Ember.Mixin.create(/** @scope AutoResize.prototype */{
+export default Ember.Mixin.create({
 
   /**
     Add `ember-auto-resize` so additional
