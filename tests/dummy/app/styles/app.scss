@@ -169,9 +169,8 @@ pre, pre.hljs {
       width: 100%;
       height: 49px;
       line-height: 48px;
-      background: rgba(0, 0, 0, 0.3);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
       text-align: center;
+      border-bottom: 1px solid $secondary-color;
     }
 
     nav {
@@ -185,7 +184,7 @@ pre, pre.hljs {
       display: -webkit-flex;
       display:         flex;
       display: flex;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      border-bottom: 1px solid $secondary-color;
 
       a {
         margin: 0;
@@ -193,8 +192,11 @@ pre, pre.hljs {
                 flex: 1;
         text-align: center;
         line-height: 38px;
-        background: rgba(0, 0, 0, 0.4);
-        border-right: 1px solid rgba(255, 255, 255, 0.5);
+        background: rgba(#FFF, 0.4);
+
+        & + a {
+          border-left: 1px solid $secondary-color;
+        }
       }
     }
   }
