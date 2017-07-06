@@ -43,10 +43,10 @@
 import OneWayInput from 'ember-one-way-controls/components/one-way-input';
 import Autoresize from 'ember-autoresize/mixins/autoresize';
 
-export OneWayInput.extend(Autoresize, {
+export default OneWayInput.extend(Autoresize, {
   shouldResizeWidth: true,
   significantWhitespace: true,
-  autoResizeText: Ember.computed('value', 'placeholder', {
+  autoResizeText: Ember.computed('value', 'placeholder', function () {
     let placeholder = this.get('placeholder');
     let value = this.get('value');
 
@@ -62,14 +62,13 @@ export OneWayInput.extend(Autoresize, {
         <p>The above code will result in the same interface as \{{input}}.</p>
         <hr>
 
-        <p>If you're creating a custom text field, you can use the Autoresize mixin to enable autoresizing:</p>
-        {{#window-pane title='text-field/component.js'}}
+        <p>If you're creating a custom text area, you can use the Autoresize mixin to enable autoresizing:</p>
+        {{#window-pane title='text-area/component.js'}}
           <pre><code>import Ember from 'ember';
 import Autoresize from 'ember-autoresize/mixins/autoresize';
 
-export Ember.Component.extend(Autoresize, {
-  tagName: '',
-  shouldResizeWidth: true,
+export default Ember.Component.extend(Autoresize, {
+  shouldResizeHeight: true,
   significantWhitespace: true,
   autoresizeElement: Ember.computed({
     set(_, value) {
@@ -88,7 +87,7 @@ export Ember.Component.extend(Autoresize, {
     textarea.selectionEnd = selectionEnd;
   },
 
-  autoResizeText: Ember.computed('value', 'placeholder', {
+  autoResizeText: Ember.computed('value', 'placeholder', function () {
     let placeholder = this.get('placeholder');
     let value = this.get('value');
 
@@ -101,7 +100,7 @@ export Ember.Component.extend(Autoresize, {
 
   actions: {
     setValue() {
-      let textarea = get(this, 'element').querySelector('textarea');
+      let textarea = this.get('element').querySelector('textarea');
       this.get('onchange')(textarea.value);
     }
   }
@@ -121,6 +120,9 @@ export Ember.Component.extend(Autoresize, {
           <span class='literal'>disabled</span>=<span class='attribute'>\{{disabled}}</span>&gt;&lt;/textarea&gt;
           </code></pre>
         {{/window-pane}}
+
+        <br>
+        {{text-area onchange=(action (mut text)) value=text rows=2 max-rows=5}}
       </div>
     </section>
   </main>
