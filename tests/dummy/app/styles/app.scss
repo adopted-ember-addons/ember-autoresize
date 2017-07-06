@@ -2,24 +2,71 @@
 @import 'colors';
 @import 'code';
 @import 'grid';
-@import 'routes/index';
-@import 'routes/chat';
-@import 'components/window';
-@import 'components/console-window';
-@import 'components/editor-window';
-@import 'components/app-window';
-@import 'components/app-layer';
+
+@import 'pod-styles';
+
+* {
+  box-sizing: border-box;
+}
 
 html, body {
   margin: 0;
   padding: 0;
-  font-family: Lato, Helvetica, 'Helvetica Neue', Arial;
+  font-family: OfficeCodePro, Consolas, Inconsolata, monspace;
+  background: linear-gradient(#FFFFFF, #FFFFFF 50%, $primary-color 50%, $primary-color);
+}
+
+input[type=text],
+input[type=date],
+input[type=datetime-local],
+input[type=email],
+input[type=tel],
+input[type=password],
+input[type=number],
+input[type=url],
+textarea {
+  height: 40px;
+  border: 2px solid $black;
+  font-size: 1rem;
+  padding: 0 0.5em;
+  font-family: OfficeCodePro, Consolas, Inconsolata, monspace;
+  border-radius: 0;
+  box-shadow: none;
+  width: 100%;
+  max-width: 100%;
+  transition: box-shadow 120ms;
+  -webkit-appearance: textfield;
+     -moz-appearance: textfield;
+      -ms-appearance: textfield;
+          appearance: textfield;
+
+  background: $transparent;
+  box-shadow: none;
+  &:hover {
+    box-shadow: 0 0 0 3px rgba($black, 0.1);
+  }
+
+  &:focus, &:active {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($black, 0.25);
+  }
+}
+
+.boolean-field {
+  font-size: 1rem;
+  padding: 0 0.5em;
+  cursor: pointer;
+}
+
+.info {
+  max-width: 500px;
+  margin: 0 auto;
+  padding-bottom: 1.5em;
 }
 
 header {
-  background: $ember;
-  color: #FFF;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  background: $primary-color;
+  color: #111;
   padding: 20px 50px;
 
   h1 {
@@ -45,7 +92,7 @@ header {
     text-align: right;
 
     a {
-      color: #FFF;
+      color: #111;
       text-decoration: none;
       margin-left: 40px;
 
@@ -59,14 +106,13 @@ header {
   }
 }
 
-section {
-  max-width: 80%;
-  margin: 0 auto;
+section > h2 {
+  padding: 30px 0;
+  margin: 40px 0;
+}
 
-  & > h2 {
-    padding: 30px 0;
-    margin: 40px 0;
-  }
+main {
+  background: #FFFFFF;
 }
 
 p {
@@ -88,7 +134,7 @@ hr {
 
 
 pre, pre.hljs {
-  font-family: 'OfficeCodePro';
+  font-family: OfficeCodePro, Consolas, Inconsolata, monspace;
   font-size: 14px;
   background: #FAFAFA;
   border-top: 1px solid #DEDEDE;
@@ -97,10 +143,10 @@ pre, pre.hljs {
 }
 
 ::selection {
-  background: #FF9A89;
+  background: #DEDDED;
 }
 ::-moz-selection {
-  background: #FF9A89;
+  background: #DEDDED;
 }
 
 @media screen and (max-width: 550px) {

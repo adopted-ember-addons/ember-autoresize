@@ -1,38 +1,38 @@
 code {
   font-family: OfficeCodePro;
   font-size: 15px;
-  white-space: nowrap;
+
+  .text-field, .boolean-field {
+    display: inline-block;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    input {
+      max-width: initial;
+      border-radius: 4px;
+      height: 24px;
+    }
+  }
 
   &.inline {
     border: 1px solid #DDD;
     border-radius: 4px;
     padding: 0 4px;
+    background-color: #F5F5F5;
   }
 
-  .tag,
-  .hbs-directive {
-    color: $green;
+  .helper {
+    &, input { color: $green; }
   }
 
-  .hbs-string {
-    color: $red;
+  .string {
+    &, input { color: $red; }
   }
 
-  .attr-value,
-  .hbs-block-param,
-  .hbs-path,
-  .hbs-number,
-  .hbs-bool {
-    color: $blue;
+  .literal {
+    &, input { color: $blue; }
   }
 
-  .attr-key,
-  .hbs-keyword,
-  .hbs-key {
-    color: $pink;
-  }
-
-  .comment {
-    color: $gray;
+  .attribute {
+    &, input { color: $pink; }
   }
 }

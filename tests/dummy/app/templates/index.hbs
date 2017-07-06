@@ -1,67 +1,23 @@
-<header>
-  <h1>{{svg-jar 'icon'}} ember-autoresize</h1><nav>
-    <a href="/docs">Docs</a>
-    <a href="https://github.com/tim-evans/ember-autoresize" target="__blank">GitHub</a>
-  </nav>
-</header>
+<div id='index'>
+  <div class="hero">
+    <p>Autoresizing text fields <br>for your {{svg-jar 'ember-logo' title="Ember"}} app</p>
+    <a class="more" href="#installation">{{svg-jar 'arrow'}}</a>
+  </div>
 
-<div class="hero">
-  <p>Autoresizing text fields for your <img class="ember-logo" alt="ember" src="assets/images/ember-logo.png" /> app</p>
-  <a class="more" href="#installation">{{svg-jar 'arrow'}}</a>
+  <main>
+    <section id="installation">
+      <h2>Installation</h2>
+      <div class="grid">
+        {{#window-pane}}
+          <span class="ps1">&gt; </span>ember install ember-autoresize
+        {{/window-pane}}
+      </div>
+    </section>
+
+    <section id="playground">
+      <h2>Playground</h2>
+      <div class="grid">
+      </div>
+    </section>
+  </main>
 </div>
-
-<section id="installation">
-  <h2>Installation</h2>
-  {{#console-window}}
-    <span class="ps1">$ </span>ember install ember-autoresize
-  {{/console-window}}
-</section>
-
-<section>
-  <h2>Usage</h2>
-  <p>To add autoresizing to an \{{input}}, set autoresize to true:</p>
-  {{editor-window title="input.hbs"}}
-  <p>You may then specify the maximum width that the input may resize to by setting the max-width property.</p>
-</section>
-
-<section>
-  <h2>Usage</h2>
-  <p>To add autoresizing to an \{{input}}, set autoresize to true:</p>
-  {{editor-window title="reciept.hbs"}}
-
-  {{#app-window title="Reciept"}}
-  <form>
-    {{! BEGIN-SNIPPET reciept}}
-    <h2>Ember.js</h2>
-    <label for="invoice-notes">Notes</label>
-    {{textarea id="invoice-notes" value=notes autoresize=true rows=4 max-rows=8}}
-    <hr>
-
-    <label for="item-price">Price</label>
-    {{input id="item-price" placeholder="$0.00" value=price autoresize=true max-width=200}}
-    {{! END-SNIPPET}}
-  </form>
-  {{/app-window}}
-</section>
-
-<section>
-  <h2>Usage</h2>
-  <p>To add autoresizing to an \{{textarea}}, set autoresize to true:</p>
-  {{editor-window title="chat.hbs"}}
-
-  {{#app-window title="tomster@emberjs.com" id="chat"}}
-    {{! BEGIN-SNIPPET chat}}
-    <ul>
-      {{#each model.messages as |message|}}
-        <li class="{{if message.to 'to' 'from'}}">
-          <span class="message">{{{message.text}}}</span>
-        </li>
-      {{/each}}
-    </ul>
-    <form>
-      {{textarea value=msg autoresize=true max-rows=4 placeholder="Type to send a chat to tomster@emberjs.com"}}
-      <button {{action "sendChat" msg}}>Send</button>
-    </form>
-    {{! END-SNIPPET}}
-  {{/app-window}}
-</section>

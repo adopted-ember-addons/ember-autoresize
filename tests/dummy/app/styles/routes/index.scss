@@ -1,14 +1,15 @@
 #index {
   .hero {
     position: relative;
-    font-size: 42px;
-    background: linear-gradient($ember, $accent-color);
-    color: #FFF;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    font-size: 2.3rem;
+    background: linear-gradient($primary-color, $secondary-color);
+    color: #111;
     height: 60vh;
+    min-height: 250px;
     overflow: hidden;
 
     p {
+      transition: all 120ms;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -17,10 +18,13 @@
       line-height: 1.7em;
       width: 500px;
       text-align: center;
+      font-weight: bold;
     }
 
-    .ember-logo {
+    svg {
+      transition: all 120ms;
       height: 50px;
+      width: 120px;
       position: relative;
       top: 4px;
     }
@@ -54,6 +58,7 @@
     &:after {
       content: ' ';
       position: absolute;
+      z-index: 1;
       bottom: 0;
       left: 0;
       right: 0;
@@ -62,9 +67,8 @@
     }
   }
 
-  input, textarea {
-    font-family: Lato, Helvetica, 'Helvetica Neue', Arial;
-    font-size: 13px;
+  #playground .window-pane > div {
+    padding-bottom: 50px;
   }
 }
 
@@ -74,8 +78,9 @@
     p {
       width: 360px;
     }
-    .ember-logo {
-      height: 36px;
+    svg {
+      width: 108px;
+      height: 45px;
     }
   }
 }
@@ -86,8 +91,9 @@
     p {
       width: 340px;
     }
-    .ember-logo {
-      height: 32px;
+    svg {
+      width: 96px;
+      height: 40px;
     }
   }
 }
@@ -95,11 +101,9 @@
 @media screen and (max-height: 400px) {
   #index .hero {
     font-size: 32px;
-    p {
-      width: 335px;
-    }
-    .ember-logo {
-      height: 36px;
+    svg {
+      width: 108px;
+      height: 45px;
     }
   }
 }
@@ -111,8 +115,9 @@
     p {
       width: 100vw;
     }
-    .ember-logo {
-      height: 32px;
+    svg {
+      width: 96px;
+      height: 40px;
     }
   }
 }

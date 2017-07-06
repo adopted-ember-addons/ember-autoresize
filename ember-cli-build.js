@@ -1,14 +1,15 @@
-/*jshint node:true*/
-/* global require, module */
-var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
+/* eslint-env node */
+'use strict';
+
+const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
 module.exports = function(defaults) {
-  var project = defaults.project;
-  var options = {};
+  let project = defaults.project;
+  let options = {};
   if (project.findAddonByName('ember-native-dom-event-dispatcher')) {
     options.vendorFiles = { 'jquery.js': null };
   }
-  var app = new EmberAddon(defaults, options, {
+  let app = new EmberAddon(defaults, options, {
     // Add options here
     fingerprint: {
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'eot', 'ttf', 'woff', 'woff2', 'svg'],
