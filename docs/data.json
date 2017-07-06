@@ -1,22 +1,22 @@
 {
     "project": {},
     "files": {
-        "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/ext/text-area.js": {
-            "name": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/ext/text-area.js",
+        "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/ext/text-area.js": {
+            "name": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/ext/text-area.js",
             "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
-        "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/ext/text-field.js": {
-            "name": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/ext/text-field.js",
+        "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/ext/text-field.js": {
+            "name": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/ext/text-field.js",
             "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
-        "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/mixins/autoresize.js": {
-            "name": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/mixins/autoresize.js",
+        "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/mixins/autoresize.js": {
+            "name": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/mixins/autoresize.js",
             "modules": {},
             "classes": {
                 "AutoResize": 1
@@ -35,7 +35,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/mixins/autoresize.js",
+            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/mixins/autoresize.js",
             "line": 31,
             "description": "This mixin provides common functionality for automatically\nresizing view depending on the contents of the view. To\nmake your view resize, you need to set the `autoresize`\nproperty to `true`, and let the mixin know whether it\ncan resize the height of width.\n\nIn addition, `autoResizeText` is a required property for\nthis mixin. It is already provided for `Ember.TextField` and\n`Ember.TextArea`.",
             "extends": "Ember.Mixin",
@@ -59,7 +59,7 @@
                     "description": "Optimistically resize the height\nof the textarea so when users reach\nthe end of a line, they will be\npresented with space to begin typing."
                 }
             ],
-            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/ext/text-area.js",
+            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/ext/text-area.js",
             "line": 7
         },
         "input": {
@@ -78,13 +78,13 @@
                     "description": "This provides a single character\nso users can click into an empty\ntext field without it being too small\n\nIf a placeholder is set,\nit will be used instead."
                 }
             ],
-            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/ext/text-field.js",
+            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/ext/text-field.js",
             "line": 7
         }
     },
     "classitems": [
         {
-            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/mixins/autoresize.js",
+            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/mixins/autoresize.js",
             "line": 48,
             "description": "Add `ember-auto-resize` so additional\nstyling can be applied indicating that\nthe text field will automatically resize.",
             "itemtype": "property",
@@ -92,7 +92,7 @@
             "class": "AutoResize"
         },
         {
-            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/mixins/autoresize.js",
+            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/mixins/autoresize.js",
             "line": 57,
             "description": "Whether the view using this mixin should\nautoresize it's contents. To enable autoresizing\nusing the view's default resizing, set\nthe attribute in your template.\n\n```handlebars\n{{input autoresize=true}}\n```",
             "itemtype": "property",
@@ -102,7 +102,7 @@
             "class": "AutoResize"
         },
         {
-            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/mixins/autoresize.js",
+            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/mixins/autoresize.js",
             "line": 81,
             "description": "The DOM element that should be targeted\nfor autoresizing. This defaults to the\ncomponent's element, but may be used\nto autoresize a child element in cases\nwhere you may be using raw HTML elements.\n\nThis element *must* be observable to trigger\nproper resizing.",
             "itemtype": "property",
@@ -112,7 +112,7 @@
             "class": "AutoResize"
         },
         {
-            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/mixins/autoresize.js",
+            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/mixins/autoresize.js",
             "line": 101,
             "description": "The current dimensions of the view being\nresized in terms of an object hash that\nincludes a `width` and `height` property.",
             "itemtype": "property",
@@ -122,7 +122,7 @@
             "class": "AutoResize"
         },
         {
-            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/mixins/autoresize.js",
+            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/mixins/autoresize.js",
             "line": 112,
             "description": "Whether the auto resize mixin should resize\nthe width of this view.",
             "itemtype": "property",
@@ -132,7 +132,7 @@
             "class": "AutoResize"
         },
         {
-            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/mixins/autoresize.js",
+            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/mixins/autoresize.js",
             "line": 122,
             "description": "Whether the auto resize mixin should resize\nthe height of this view.",
             "itemtype": "property",
@@ -142,7 +142,7 @@
             "class": "AutoResize"
         },
         {
-            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/mixins/autoresize.js",
+            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/mixins/autoresize.js",
             "line": 132,
             "description": "If set, this property will dictate how much\nthe view is allowed to resize horizontally\nuntil it either falls back to scrolling or\nresizing vertically.",
             "itemtype": "property",
@@ -152,7 +152,7 @@
             "class": "AutoResize"
         },
         {
-            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/mixins/autoresize.js",
+            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/mixins/autoresize.js",
             "line": 144,
             "description": "If set, this property dictates how much\nthe view is allowed to resize vertically.\nIf this is not set and the view is allowed\nto resize vertically, it will do so infinitely.",
             "itemtype": "property",
@@ -162,7 +162,7 @@
             "class": "AutoResize"
         },
         {
-            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/mixins/autoresize.js",
+            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/mixins/autoresize.js",
             "line": 156,
             "description": "A required property that should alias the\nproperty that should trigger recalculating\nthe dimensions of the view.",
             "itemtype": "property",
@@ -172,7 +172,7 @@
             "class": "AutoResize"
         },
         {
-            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/mixins/autoresize.js",
+            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/mixins/autoresize.js",
             "line": 167,
             "description": "Whether the autoResizeText has been sanitized\nand should be treated as HTML.",
             "itemtype": "property",
@@ -182,7 +182,7 @@
             "class": "AutoResize"
         },
         {
-            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/mixins/autoresize.js",
+            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/mixins/autoresize.js",
             "line": 177,
             "description": "Whether whitespace should be treated as significant\ncontrary to any styles on the view.",
             "itemtype": "property",
@@ -192,7 +192,7 @@
             "class": "AutoResize"
         },
         {
-            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/mixins/autoresize.js",
+            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/mixins/autoresize.js",
             "line": 187,
             "description": "Schedule measuring the view's size.\nThis happens automatically when the\n`autoResizeText` property changes.",
             "itemtype": "method",
@@ -200,7 +200,7 @@
             "class": "AutoResize"
         },
         {
-            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/mixins/autoresize.js",
+            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/mixins/autoresize.js",
             "line": 200,
             "description": "Detect when a font is loaded and resize the box.",
             "access": "private",
@@ -210,7 +210,7 @@
             "class": "AutoResize"
         },
         {
-            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/mixins/autoresize.js",
+            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/mixins/autoresize.js",
             "line": 216,
             "description": "Measures the size of the text of the element.",
             "itemtype": "method",
@@ -218,7 +218,7 @@
             "class": "AutoResize"
         },
         {
-            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/mixins/autoresize.js",
+            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/mixins/autoresize.js",
             "line": 298,
             "description": "Alter the `dimensions` property of the\nview to conform to the measured size of\nthe view.",
             "itemtype": "method",
@@ -226,7 +226,7 @@
             "class": "AutoResize"
         },
         {
-            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-F86YVqQM.tmp/mixins/autoresize.js",
+            "file": "/Users/tim/oven/ember-autoresize/tmp/broccoli_yuidoc-input_base_path-dbiNOVmQ.tmp/mixins/autoresize.js",
             "line": 346,
             "description": "Retiles the view at the end of the render queue.",
             "itemtype": "method",
