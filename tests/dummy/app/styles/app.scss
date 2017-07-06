@@ -75,15 +75,19 @@ header {
     font-size: 18px;
     margin: 0;
 
+    a {
+      color: #111;
+      text-decoration: none;
+    }
+
     svg {
       position: relative;
       top: 2px;
-    }
-  }
 
-  svg {
-    -webkit-filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
-            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+      path {
+        fill: #111;
+      }
+    }
   }
 
   nav {

@@ -27,6 +27,10 @@
       width: 120px;
       position: relative;
       top: 4px;
+
+      path, text {
+        fill: #111;
+      }
     }
 
     .more {
