@@ -14,9 +14,51 @@
       </div>
     </section>
 
-    <section id="playground">
-      <h2>Playground</h2>
+    <section id="getting-started">
+      <h2>Getting Started</h2>
       <div class="grid">
+        <p>The easiest way to get started with `ember-autoresize` is to use Ember's existing text field components, <code>\{{input}}</code> and <code>\{{textarea}}</code>.</p>
+
+        <p>Using these components, you can enable autoresizing by setting `autoresize` to true:</p>
+
+        {{#window-pane}}
+          <code>
+            \{{<span class="helper">input</span> <span class="literal">autoresize</span>=<span class="attribute">true</span> <span class="literal">placeholder</span>=<span class="string">"Enter Text"</span>}}<br>
+            \{{<span class="helper">textarea</span> <span class="literal">autoresize</span>=<span class="attribute">true</span> <span class="literal">rows</span>=<span class="attribute">2</span> <span class="literal">max-rows</span>=<span class="attribute">5</span>}}
+          </code>
+        {{/window-pane}}
+        <br>
+        {{input autoresize=true placeholder="Enter Text"}}
+        <br><br>
+        {{textarea autoresize=true rows=2 max-rows=5}}
+
+        <br>
+        <br>
+        <hr>
+
+        <p>If you're using something like <a href="https://github.com/DockYard/ember-one-way-controls" target="_blank" rel="noopener">ember-one-way-controls</a>, you can customize your components using the `Autoresize` mixin:</p>
+        {{#window-pane}}
+          <pre><code>import Ember from 'ember';
+import OneWayInput from 'ember-one-way-controls/components/one-way-input';
+import Autoresize from 'ember-autoresize/mixins/autoresize';
+
+export OneWayInput.extend(Autoresize, {
+  shouldResizeWidth: true,
+  significantWhitespace: true,
+  autoResizeText: Ember.computed('value', 'placeholder', {
+    let placeholder = this.get('placeholder');
+    let value = this.get('value');
+
+    if (Ember.isEmpty(value)) {
+      return Ember.isEmpty(placeholder) ? '.' : placeholder;
+    }
+
+    return value;
+  })
+});</code></pre>
+        {{/window-pane}}
+
+        <p>The above code will result in the same interface as \{{input}}.</p>
       </div>
     </section>
   </main>

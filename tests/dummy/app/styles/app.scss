@@ -52,10 +52,8 @@ textarea {
   }
 }
 
-.boolean-field {
-  font-size: 1rem;
-  padding: 0 0.5em;
-  cursor: pointer;
+textarea {
+  padding: 1em 0.5em;
 }
 
 .info {
@@ -140,10 +138,8 @@ hr {
 pre, pre.hljs {
   font-family: OfficeCodePro, Consolas, Inconsolata, monspace;
   font-size: 14px;
-  background: #FAFAFA;
-  border-top: 1px solid #DEDEDE;
-  border-bottom: 1px solid #DEDEDE;
-  padding: 20px;
+  margin: 0;
+  padding: 0;
 }
 
 ::selection {
