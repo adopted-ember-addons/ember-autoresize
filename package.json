@@ -42,7 +42,7 @@
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
     "ember-native-dom-event-dispatcher": "^0.6.3",
-    "ember-native-dom-helpers": "^0.5.2",
+    "ember-native-dom-helpers": "^0.6.1",
     "ember-resolver": "^4.1.0",
     "ember-source": "~2.16.0",
     "ember-svg-jar": "^0.10.3",
