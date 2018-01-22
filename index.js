@@ -1,6 +1,6 @@
 /* eslint-env node */
 'use strict';
-let VersionChecker = require('ember-cli-version-checker');
+const VersionChecker = require('ember-cli-version-checker');
 
 module.exports = {
   name: 'ember-autoresize',
