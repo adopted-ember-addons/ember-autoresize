@@ -7,7 +7,6 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.mount('addon-docs', { path: '/docs' });
 });
 
 export default Router;
