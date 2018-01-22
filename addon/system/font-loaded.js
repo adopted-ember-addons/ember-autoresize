@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import { copy } from '@ember/object/internals';
+import RSVP from 'rsvp';
+import { run } from '@ember/runloop';
 import adobeBlank from './adobe-blank';
 import { measureText } from "dom-ruler";
-
-const { RSVP, run } = Ember;
 
 function injectAdobeBlankToElement(element) {
   var sheet;
@@ -91,7 +91,7 @@ export default function (fontFamily, options={ timeout: 3000 }) {
   if (loadedFonts[fontFamily] == null) {
     loadedFonts[fontFamily] = injectAdobeBlank().then(function() {
       return new RSVP.Promise(function (resolve, reject) {
-        checkIfFontLoaded(fontFamily, Ember.copy(options, true), run.bind(resolve), run.bind(reject));
+        checkIfFontLoaded(fontFamily, copy(options, true), run.bind(resolve), run.bind(reject));
       });
     });
   }

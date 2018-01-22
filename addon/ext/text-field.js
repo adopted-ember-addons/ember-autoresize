@@ -1,13 +1,12 @@
-import Ember from "ember";
+import TextField from '@ember/component/text-field';
+import { isEmpty } from '@ember/utils';
+import { get, computed } from '@ember/object';
 import AutoResize from "../mixins/autoresize";
-
-var get = Ember.get;
-var isEmpty = Ember.isEmpty;
 
 /**
   @element input
  */
-Ember.TextField.reopen(AutoResize, {
+TextField.reopen(AutoResize, {
 
   /**
     By default, text fields only
@@ -40,7 +39,7 @@ Ember.TextField.reopen(AutoResize, {
     @attribute autoResizeText
     @type String
    */
-  autoResizeText: Ember.computed('value', 'placeholder', {
+  autoResizeText: computed('value', 'placeholder', {
     get() {
       var placeholder = get(this, 'placeholder');
       var value = get(this, 'value');

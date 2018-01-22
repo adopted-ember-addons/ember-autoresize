@@ -1,13 +1,12 @@
-import Ember from "ember";
+import TextArea from '@ember/component/text-area';
+import { isNone } from '@ember/utils';
+import { get, computed } from '@ember/object';
 import AutoResize from "../mixins/autoresize";
-
-var get = Ember.get;
-var isNone = Ember.isNone;
 
 /**
   @element text-area
  */
-Ember.TextArea.reopen(AutoResize, {
+TextArea.reopen(AutoResize, {
 
   /**
     By default, textareas only resize
@@ -37,7 +36,7 @@ Ember.TextArea.reopen(AutoResize, {
     @attribute autoResizeText
     @type String
    */
-  autoResizeText: Ember.computed('value', {
+  autoResizeText: computed('value', {
     get() {
       var value = get(this, 'value');
       if (isNone(value)) {

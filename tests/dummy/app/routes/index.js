@@ -1,11 +1,13 @@
-import Ember from 'ember';
+import { debounce } from '@ember/runloop';
+import { htmlSafe } from '@ember/string';
+import { A } from '@ember/array';
+import Route from '@ember/routing/route';
+import { set, get } from '@ember/object';
 
-const { get, set } = Ember;
-
-export default Ember.Route.extend({
+export default Route.extend({
   model() {
     return {
-      messages: Ember.A()
+      messages: A()
     };
   },
 
@@ -16,20 +18,20 @@ export default Ember.Route.extend({
   sanitizeMessage(to, message) {
     return {
       to,
-      text: Ember.String.htmlSafe(message.replace(/\n/g, '<br>'))
+      text: htmlSafe(message.replace(/\n/g, '<br>'))
     };
   },
 
   position: -1,
-  script: [
-    'Hi there!',
-    '<img src="http://cdn.inquisitr.com/wp-content/uploads/2014/07/tumblr_n8f4er3xus1ry46hlo1_r1_500.gif" />'
-  ],
 
   sayThing() {
     let model = this.modelFor(this.routeName);
     let i = get(this, 'position');
     set(this, 'position', i + 1);
+    this.script = this.script || [
+      'Hi there!',
+      '<img src="http://cdn.inquisitr.com/wp-content/uploads/2014/07/tumblr_n8f4er3xus1ry46hlo1_r1_500.gif" />'
+    ];
     get(model, 'messages').pushObject({
       from: 'tomster@emberjs.com',
       text: this.script[get(this, 'position')] || "Shhh! I'm eating"
@@ -48,7 +50,7 @@ export default Ember.Route.extend({
     },
 
     respond() {
-      Ember.run.debounce(this, 'sayThing', 1000);
+      debounce(this, 'sayThing', 1000);
     }
   }
 });

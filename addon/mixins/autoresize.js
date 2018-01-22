@@ -1,17 +1,12 @@
-import Ember from "ember";
+import { A } from '@ember/array';
+import Mixin from '@ember/object/mixin';
+import { once, scheduleOnce } from '@ember/runloop';
+import { isEmpty } from '@ember/utils';
+import { alias } from '@ember/object/computed';
+import { observer, computed, set, get } from '@ember/object';
+import { on } from '@ember/object/evented';
 import { getStyles, getLayout, measureText } from "dom-ruler";
 import fontLoaded from "../system/font-loaded";
-
-const {
-  get,
-  set,
-  run: { scheduleOnce, once },
-  isEmpty,
-  computed,
-  computed: { alias },
-  observer,
-  on
-} = Ember;
 
 // jQuery is not loaded in fastboot
 let trim = function(str) {
@@ -43,7 +38,7 @@ function withUnits(number) {
   @extends Ember.Mixin
   @since Ember 1.0.0-rc3
  */
-export default Ember.Mixin.create({
+export default Mixin.create({
 
   /**
     Add `ember-auto-resize` so additional
@@ -206,7 +201,7 @@ export default Ember.Mixin.create({
   fontFamilyLoaded: observer('autoresizeElement', function () {
     let styles = getStyles(get(this, 'autoresizeElement'));
     let fontFamilies = styles.fontFamily.split(',');
-    Ember.A(fontFamilies).forEach((fontFamily) => {
+    A(fontFamilies).forEach((fontFamily) => {
       fontLoaded(trim(fontFamily)).then(() => {
         this.scheduleMeasurement();
       }, function () {});

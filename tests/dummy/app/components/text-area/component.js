@@ -1,11 +1,13 @@
-import Ember from 'ember';
+import { isEmpty } from '@ember/utils';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import Autoresize from 'ember-autoresize/mixins/autoresize';
 
-export default Ember.Component.extend(Autoresize, {
+export default Component.extend(Autoresize, {
   shouldResizeHeight: true,
   significantWhitespace: true,
   autoresize: true,
-  autoresizeElement: Ember.computed({
+  autoresizeElement: computed({
     set(_, value) {
       return value;
     }
@@ -22,12 +24,12 @@ export default Ember.Component.extend(Autoresize, {
     textarea.selectionEnd = selectionEnd;
   },
 
-  autoResizeText: Ember.computed('value', 'placeholder', function () {
+  autoResizeText: computed('value', 'placeholder', function () {
     let placeholder = this.get('placeholder');
     let value = this.get('value');
 
-    if (Ember.isEmpty(value)) {
-      return Ember.isEmpty(placeholder) ? '.' : placeholder;
+    if (isEmpty(value)) {
+      return isEmpty(placeholder) ? '.' : placeholder;
     }
 
     return value;
