@@ -7,6 +7,7 @@ import { observer, computed, set, get } from '@ember/object';
 import { on } from '@ember/object/evented';
 import { getStyles, getLayout, measureText } from "dom-ruler";
 import fontLoaded from "../system/font-loaded";
+import config from 'ember-get-config';
 
 // jQuery is not loaded in fastboot
 let trim = function(str) {
@@ -199,6 +200,10 @@ export default Mixin.create({
     @method fontFamilyLoaded
    */
   fontFamilyLoaded: observer('autoresizeElement', function () {
+    if (!this._loadCustomFont()) {
+      return;
+    }
+
     let styles = getStyles(get(this, 'autoresizeElement'));
     let fontFamilies = styles.fontFamily.split(',');
     A(fontFamilies).forEach((fontFamily) => {
@@ -360,5 +365,13 @@ export default Mixin.create({
         element.style[prop] = styles[prop];
       }
     }
-  }
+  },
+
+  /**
+    Internal function to read config options
+  */
+  _loadCustomFont() {
+    return get(config || {}, 'ember-autoresize.customFont') !== false;
+  },
+
 });
