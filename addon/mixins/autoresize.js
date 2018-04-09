@@ -60,8 +60,7 @@ export default Mixin.create({
     {{input autoresize=true}}
     ```
 
-    @property autoresize
-    @type Boolean
+    @property {boolean} autoresize
     @default false
    */
   autoresize: computed({
@@ -84,8 +83,7 @@ export default Mixin.create({
     This element *must* be observable to trigger
     proper resizing.
 
-    @property autoresizeElement
-    @default element
+    @property {DOMElement} autoresizeElement
     @type DOMElement
    */
   autoresizeElement: null,
@@ -99,9 +97,9 @@ export default Mixin.create({
     resized in terms of an object hash that
     includes a `width` and `height` property.
 
-    @property dimensions
+    @private
+    @accessor {object} dimensions
     @default null
-    @type Object
    */
   dimensions: null,
 
@@ -109,9 +107,8 @@ export default Mixin.create({
     Whether the auto resize mixin should resize
     the width of this view.
 
-    @property shouldResizeWidth
+    @property {boolean} shouldResizeWidth
     @default false
-    @type Boolean
    */
   shouldResizeWidth: false,
 
@@ -119,9 +116,8 @@ export default Mixin.create({
     Whether the auto resize mixin should resize
     the height of this view.
 
-    @property shouldResizeHeight
+    @property {boolean} shouldResizeHeight
     @default false
-    @type Boolean
    */
   shouldResizeHeight: false,
 
@@ -131,9 +127,8 @@ export default Mixin.create({
     until it either falls back to scrolling or
     resizing vertically.
 
-    @property maxWidth
+    @property {number} maxWidth
     @default null
-    @type Number
    */
   maxWidth: alias('max-width'),
 
@@ -143,9 +138,8 @@ export default Mixin.create({
     If this is not set and the view is allowed
     to resize vertically, it will do so infinitely.
 
-    @property maxHeight
+    @property {number} maxHeight
     @default null
-    @type Number
    */
   maxHeight: alias('max-height'),
 
@@ -154,9 +148,8 @@ export default Mixin.create({
     property that should trigger recalculating
     the dimensions of the view.
 
-    @property autoResizeText
+    @property {string} autoResizeText
     @required
-    @type String
    */
   autoResizeText: null,
 
@@ -164,9 +157,8 @@ export default Mixin.create({
     Whether the autoResizeText has been sanitized
     and should be treated as HTML.
 
-    @property ignoreEscape
+    @property {boolean} ignoreEscape
     @default false
-    @type Boolean
    */
   ignoreEscape: false,
 
@@ -185,6 +177,7 @@ export default Mixin.create({
     This happens automatically when the
     `autoResizeText` property changes.
 
+    @private
     @method scheduleMeasurement
    */
   scheduleMeasurement: on('init', observer('autoResizeText', function () {
@@ -216,6 +209,7 @@ export default Mixin.create({
   /**
     Measures the size of the text of the element.
 
+    @private
     @method measureSize
    */
   measureSize() {
@@ -300,6 +294,7 @@ export default Mixin.create({
     view to conform to the measured size of
     the view.
 
+    @private
     @method measuredSizeDidChange
    */
   measuredSizeDidChange: observer('measuredSize', 'autoresizeElement', function () {
@@ -345,6 +340,8 @@ export default Mixin.create({
 
   /**
     Retiles the view at the end of the render queue.
+
+    @private
     @method dimensionsDidChange
    */
   dimensionsDidChange() {

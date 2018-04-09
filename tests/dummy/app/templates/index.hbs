@@ -1,129 +1,26 @@
-<div id='index'>
-  <div class="hero">
-    <p>Autoresizing text fields <br>for your {{svg-jar 'ember-logo' title="Ember"}} app</p>
-    <a class="more" href="#installation">{{svg-jar 'arrow'}}</a>
-  </div>
+{{docs-hero
+  logo='ember'
+  strongHeading='Autoresize'
+  byline='Autoresizing Text Fields for Ember'}}
 
-  <main>
-    <section id="installation">
-      <h2>Installation</h2>
-      <div class="grid">
-        {{#window-pane}}
-          <span class="ps1">&gt; </span>ember install ember-autoresize
-        {{/window-pane}}
-      </div>
-    </section>
+<div class='docs-container docs-md'>
+  <section class='max-w-md mx-auto'>
+    <div class="my-16 text-center">
+      {{#link-to 'docs' class='bg-grey-darkest hover:bg-black text-white py-2 px-4 no-underline rounded'}}
+        Get started →
+      {{/link-to}}
+    </div>
+  </section>
 
-    <section id="getting-started">
-      <h2>Getting Started</h2>
-      <div class="grid">
-        <p>The easiest way to get started with `ember-autoresize` is to use Ember's existing text field components, <code>\{{input}}</code> and <code>\{{textarea}}</code>.</p>
-
-        <p>Using these components, you can enable autoresizing by setting `autoresize` to true:</p>
-
-        {{#window-pane}}
-          <code>
-            \{{<span class="helper">input</span> <span class="literal">autoresize</span>=<span class="attribute">true</span> <span class="literal">placeholder</span>=<span class="string">"Enter Text"</span>}}<br>
-            \{{<span class="helper">textarea</span> <span class="literal">autoresize</span>=<span class="attribute">true</span> <span class="literal">rows</span>=<span class="attribute">2</span> <span class="literal">max-rows</span>=<span class="attribute">5</span>}}
-          </code>
-        {{/window-pane}}
-        <br>
-        {{input autoresize=true placeholder="Enter Text"}}
-        <br><br>
-        {{textarea autoresize=true rows=2 max-rows=5}}
-
-        <br>
-        <br>
-
-        <h2>Using with custom components</h2>
-
-        <p>If you're using something like <a href="https://github.com/DockYard/ember-one-way-controls" target="_blank" rel="noopener">ember-one-way-controls</a>, you can customize your components using the `Autoresize` mixin:</p>
-        {{#window-pane title='components/one-way-input.js'}}
-          <pre><code>import Ember from 'ember';
-import OneWayInput from 'ember-one-way-controls/components/one-way-input';
-import Autoresize from 'ember-autoresize/mixins/autoresize';
-
-export default OneWayInput.extend(Autoresize, {
-  shouldResizeWidth: true,
-  significantWhitespace: true,
-  autoResizeText: Ember.computed('value', 'placeholder', function () {
-    let placeholder = this.get('placeholder');
-    let value = this.get('value');
-
-    if (Ember.isEmpty(value)) {
-      return Ember.isEmpty(placeholder) ? '.' : placeholder;
-    }
-
-    return value;
-  })
-});</code></pre>
-        {{/window-pane}}
-
-        <p>The above code will result in the same interface as \{{input}}.</p>
-        <hr>
-
-        <p>If you're creating a custom text area, you can use the Autoresize mixin to enable autoresizing:</p>
-        {{#window-pane title='text-area/component.js'}}
-          <pre><code>import Ember from 'ember';
-import Autoresize from 'ember-autoresize/mixins/autoresize';
-
-export default Ember.Component.extend(Autoresize, {
-  shouldResizeHeight: true,
-  significantWhitespace: true,
-  autoresizeElement: Ember.computed({
-    set(_, value) {
-      return value;
-    }
-  }),
-
-  didRender() {
-    let textarea = this.element.querySelector('textarea');
-    let selectionStart = textarea.selectionStart;
-    let selectionEnd = textarea.selectionEnd;
-
-    this.set('autoresizeElement', textarea);
-    textarea.value = this.get('value') || '';
-    textarea.selectionStart = selectionStart;
-    textarea.selectionEnd = selectionEnd;
-  },
-
-  autoResizeText: Ember.computed('value', 'placeholder', function () {
-    let placeholder = this.get('placeholder');
-    let value = this.get('value');
-
-    if (Ember.isEmpty(value)) {
-      return Ember.isEmpty(placeholder) ? '.' : placeholder;
-    }
-
-    return value;
-  }),
-
-  actions: {
-    setValue() {
-      let textarea = this.get('element').querySelector('textarea');
-      this.get('onchange')(textarea.value);
-    }
-  }
-});</code></pre>
-        {{/window-pane}}
-
-        <br>
-        {{#window-pane title='text-field/template.hbs'}}
-        <pre><code>
-&lt;textarea <span class='literal'>id</span>=<span class='string'>\{{inputId}}</span>
-          <span class='literal'>name</span>=<span class='string'>\{{name}}</span>
-          <span class='literal'>rows</span>=<span class='attribute'>\{{rows}}</span>
-          <span class='literal'>autocomplete</span>=<span class='string'>"off"</span>
-          <span class='literal'>onpaste</span>=\{{<span class='helper'>action</span> <span class='string'>'setValue'</span>}}
-          <span class='literal'>onchange</span>=\{{<span class='helper'>action</span> <span class='string'>'setValue'</span>}}
-          <span class='literal'>oninput</span>=\{{<span class='helper'>action</span> <span class='string'>'setValue'</span>}}
-          <span class='literal'>disabled</span>=<span class='attribute'>\{{disabled}}</span>&gt;&lt;/textarea&gt;
-          </code></pre>
-        {{/window-pane}}
-
-        <br>
-        {{text-area onchange=(action (mut text)) value=text rows=2 max-rows=5}}
-      </div>
-    </section>
-  </main>
+  <section class="max-w-md mx-auto">
+    <div class="my-16 text-center">
+      {{#docs-demo as |demo|}}
+        {{#demo.example name='my-demo.hbs'}}
+          {{textarea placeholder='Type here'
+             autoresize=true rows=2 max-rows=5}}
+        {{/demo.example}}
+        {{demo.snippet 'my-demo.hbs'}}
+      {{/docs-demo}}
+    </div>
+  </section>
 </div>

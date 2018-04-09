@@ -1,0 +1,7 @@
+{{#if max-width}}
+  <div class='horizontal-ruler' style={{styles}}></div>
+  <div style={{styles}}>max-width: {{input autoresize=true value=max-width}}</div>
+{{else if max-height}}
+  <div class='vertical-units' style={{styles}}><p>max-height: {{input autoresize=true value=max-height}}</p></div>
+  <div class='vertical-ruler' style={{styles}}></div>
+{{/if}}

@@ -7,8 +7,7 @@ module.exports = function(defaults) {
   let project = defaults.project;
   let options = {
     fingerprint: {
-      extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'eot', 'ttf', 'woff', 'woff2', 'svg'],
-      prepend: '/ember-autoresize/'
+      extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'eot', 'ttf', 'woff', 'woff2', 'svg']
     },
     sassOptions: {
       includePaths: ['tests/dummy/app']
