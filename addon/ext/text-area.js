@@ -1,5 +1,5 @@
 import TextArea from '@ember/component/text-area';
-import { isNone } from '@ember/utils';
+import { isEmpty } from '@ember/utils';
 import { get, computed } from '@ember/object';
 import AutoResize from "../mixins/autoresize";
 
@@ -43,12 +43,13 @@ TextArea.reopen(AutoResize, {
     get() {
       var placeholder = get(this, 'placeholder');
       var value = get(this, 'value');
+      var fillChar = '@';
 
-      if (isNone(value)) {
-        return isNone(placeholder) ? '@' : placeholder;
+      if (isEmpty(value)) {
+        return isEmpty(placeholder) ? fillChar : placeholder + fillChar;
       }
 
-      return value + '@';
+      return value + fillChar;
     }
   })
 
