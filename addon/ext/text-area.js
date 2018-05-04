@@ -33,15 +33,21 @@ TextArea.reopen(AutoResize, {
     the end of a line, they will be
     presented with space to begin typing.
 
+    If a placeholder is set,
+    it will be used instead of the value.
+
     @attribute autoResizeText
     @type String
    */
-  autoResizeText: computed('value', {
+  autoResizeText: computed('value', 'placeholder', {
     get() {
+      var placeholder = get(this, 'placeholder');
       var value = get(this, 'value');
+
       if (isNone(value)) {
-        value = '';
+        return isNone(placeholder) ? '@' : placeholder;
       }
+
       return value + '@';
     }
   })
