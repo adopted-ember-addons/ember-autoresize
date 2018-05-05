@@ -1,5 +1,5 @@
 import TextArea from '@ember/component/text-area';
-import { isNone } from '@ember/utils';
+import { isEmpty, isNone } from '@ember/utils';
 import { get, computed } from '@ember/object';
 import AutoResize from "../mixins/autoresize";
 
@@ -33,16 +33,27 @@ TextArea.reopen(AutoResize, {
     the end of a line, they will be
     presented with space to begin typing.
 
+    If a placeholder is set,
+    it will be used instead of the value.
+
     @attribute autoResizeText
     @type String
    */
-  autoResizeText: computed('value', {
+  autoResizeText: computed('value', 'placeholder', {
     get() {
+      var placeholder = get(this, 'placeholder');
       var value = get(this, 'value');
+      var fillChar = '@';
+
+      if (isEmpty(value)) {
+        return isEmpty(placeholder) ? fillChar : placeholder + fillChar;
+      }
+
       if (isNone(value)) {
         value = '';
       }
-      return value + '@';
+
+      return value + fillChar;
     }
   })
 
