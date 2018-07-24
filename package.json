@@ -57,7 +57,7 @@
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-native-dom-event-dispatcher": "^0.6.3",
     "ember-native-dom-helpers": "^0.6.1",
-    "ember-resolver": "^4.0.0",
+    "ember-resolver": "^5.0.0",
     "ember-router-scroll": "^0.6.0",
     "ember-source": "~3.0.0",
     "ember-source-channel-url": "^1.0.1",
