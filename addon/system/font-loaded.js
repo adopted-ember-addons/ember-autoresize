@@ -1,4 +1,4 @@
-import { copy } from '@ember/object/internals';
+import { copy } from 'ember-copy';
 import RSVP from 'rsvp';
 import { run } from '@ember/runloop';
 import adobeBlank from './adobe-blank';

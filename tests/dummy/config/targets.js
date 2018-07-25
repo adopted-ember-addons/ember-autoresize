@@ -1,11 +1,13 @@
-var browsers = [
+'use strict';
+
+const browsers = [
   'last 1 Chrome versions',
   'last 1 Firefox versions',
   'last 1 Safari versions'
 ];
 
-var isCI = !!process.env.CI;
-var isProduction = process.env.EMBER_ENV === 'production';
+const isCI = !!process.env.CI;
+const isProduction = process.env.EMBER_ENV === 'production';
 
 if (isCI || isProduction) {
   browsers.push('ie 11');
