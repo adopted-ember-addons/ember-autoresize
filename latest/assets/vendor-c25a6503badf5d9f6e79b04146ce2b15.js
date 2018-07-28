@@ -5831,18 +5831,18 @@ Object.defineProperty(e,"__esModule",{value:!0})
 var r=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r]
 n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),n=function(){function e(t){var r=arguments.length>1&&void 0!==arguments[1]?arguments[1]:[],n=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{};(function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")})(this,e),"function"==typeof t?this.handler=t:this.name=t,this.reversed=n.reversed,this.args=r}return r(e,[{key:"validateHandler",value:function(e){this.handler||(this.handler=e.lookup(this.name))}},{key:"run",value:function(e){var r=this
 return new t.default(function(n,i){t.default.resolve(r.handler.apply(e,r.args)).then(n,i)})}}]),e}()
-e.default=n}),define("liquid-fire/animate",["exports","liquid-fire/promise","velocity"],function(e,t,r){"use strict"
-function n(e,t){return e&&e.data("lfTags_"+t)}function i(e,t){var r=n(e,t)
+e.default=n}),define("liquid-fire/animate",["exports","ember-copy","liquid-fire/promise","velocity"],function(e,t,r,n){"use strict"
+function i(e,t){return e&&e.data("lfTags_"+t)}function o(e,t){var r=i(e,t)
 if(!r)throw new Error("no animation labeled "+t+" is in progress")
-return r}function o(e,t){e&&e.data("lfTags_"+t,null)}Object.defineProperty(e,"__esModule",{value:!0}),e.animate=function(e,n,i,a){var s={percentComplete:0,timeRemaining:100,timeSpent:0}
-if(!e||0===e.length)return t.default.resolve()
-i=i?Ember.copy(i):{}
-void 0===i.display&&(i.display="")
-void 0===i.visibility&&(i.visibility="")
-if(i.progress)throw new Error("liquid-fire's 'animate' function reserves the use of Velocity's 'progress' option for its own nefarious purposes.")
-i.progress=function(){s.percentComplete=arguments[1],s.timeRemaining=arguments[2],s.timeSpent=s.timeRemaining/(1/s.percentComplete-1)},s.promise=t.default.resolve(r.default.animate(e[0],n,i)),a&&(s.promise=s.promise.then(function(){o(e,a)},function(t){throw o(e,a),t}),function(e,t,r){e&&e.data("lfTags_"+t,r)}(e,a,s))
-return s.promise},e.stop=function(e){e&&(0,r.default)(e[0],"stop",!0)},e.setDefaults=function(e){for(var t in e)if(e.hasOwnProperty(t)){if("progress"===t)throw new Error("liquid-fire's 'animate' function reserves the use of Velocity's '"+t+"' option for its own nefarious purposes.")
-r.default.defaults[t]=e[t]}},e.isAnimating=n,e.finish=function(e,t){return i(e,t).promise},e.timeSpent=function(e,t){return i(e,t).timeSpent},e.timeRemaining=function(e,t){return i(e,t).timeRemaining},r.default.Promise||(r.default.Promise=t.default),r.default.timestamp=!1}),define("liquid-fire/components/-lf-get-outlet-state",["exports","liquid-fire/ember-internals"],function(e,t){"use strict"
+return r}function a(e,t){e&&e.data("lfTags_"+t,null)}Object.defineProperty(e,"__esModule",{value:!0}),e.animate=function(e,i,o,s){var u={percentComplete:0,timeRemaining:100,timeSpent:0}
+if(!e||0===e.length)return r.default.resolve()
+o=o?(0,t.copy)(o):{}
+void 0===o.display&&(o.display="")
+void 0===o.visibility&&(o.visibility="")
+if(o.progress)throw new Error("liquid-fire's 'animate' function reserves the use of Velocity's 'progress' option for its own nefarious purposes.")
+o.progress=function(){u.percentComplete=arguments[1],u.timeRemaining=arguments[2],u.timeSpent=u.timeRemaining/(1/u.percentComplete-1)},u.promise=r.default.resolve(n.default.animate(e[0],i,o)),s&&(u.promise=u.promise.then(function(){a(e,s)},function(t){throw a(e,s),t}),function(e,t,r){e&&e.data("lfTags_"+t,r)}(e,s,u))
+return u.promise},e.stop=function(e){e&&(0,n.default)(e[0],"stop",!0)},e.setDefaults=function(e){for(var t in e)if(e.hasOwnProperty(t)){if("progress"===t)throw new Error("liquid-fire's 'animate' function reserves the use of Velocity's '"+t+"' option for its own nefarious purposes.")
+n.default.defaults[t]=e[t]}},e.isAnimating=i,e.finish=function(e,t){return o(e,t).promise},e.timeSpent=function(e,t){return o(e,t).timeSpent},e.timeRemaining=function(e,t){return o(e,t).timeRemaining},n.default.Promise||(n.default.Promise=r.default),n.default.timestamp=!1}),define("liquid-fire/components/-lf-get-outlet-state",["exports","liquid-fire/ember-internals"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=Ember.Component.extend({tagName:"",layout:t.getOutletStateTemplate})}),define("liquid-fire/components/illiquid-model",["exports","liquid-fire/templates/components/illiquid-model"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0})
 var r=Ember.Component.extend({layout:t.default,tagName:"",didReceiveAttrs:function(){this.get("_fixedModel")||this.set("_fixedModel",this.get("model"))}})
@@ -5851,16 +5851,16 @@ Object.defineProperty(e,"__esModule",{value:!0})
 var r=Ember.Component.extend({layout:t.default,tagName:"",positionalParams:["value"],forwardMatchContext:Ember.computed("matchContext",function(){var e=this.get("matchContext")
 return e||(e={}),e.helperName||(e.helperName="liquid-bind"),e})})
 r.reopenClass({positionalParams:["value"]}),e.default=r}),define("liquid-fire/components/liquid-child",["exports"],function(e){"use strict"
-Object.defineProperty(e,"__esModule",{value:!0}),e.default=Ember.Component.extend({classNames:["liquid-child"],init:function(){this._super.apply(this,arguments),this._waitingFor=[]},didInsertElement:function(){var e=this,t=this.$()
-t&&t.css("visibility","hidden"),this._waitForAll().then(function(){e.isDestroying||(e._waitingFor=null,e.sendAction("liquidChildDidRender",e))})},_isLiquidChild:!0,_waitForMe:function(e){if(this._waitingFor){this._waitingFor.push(e)
+Object.defineProperty(e,"__esModule",{value:!0}),e.default=Ember.Component.extend({classNames:["liquid-child"],init:function(){this._super.apply(this,arguments),this._waitingFor=[]},didInsertElement:function(){var e=this
+this.element&&(this.element.style.visibility="hidden"),this._waitForAll().then(function(){if(!e.isDestroying){e._waitingFor=null
+var t=Ember.get(e,"liquidChildDidRender")
+"function"==typeof t&&t(e)}})},_isLiquidChild:!0,_waitForMe:function(e){if(this._waitingFor){this._waitingFor.push(e)
 var t=this.nearestWithProperty("_isLiquidChild")
 t&&t._waitForMe(e)}},_waitForAll:function(){var e=this,t=this._waitingFor
 return this._waitingFor=[],Ember.RSVP.Promise.all(t).then(function(){if(e._waitingFor.length>0)return e._waitForAll()})}})}),define("liquid-fire/components/liquid-container",["exports","liquid-fire/growable","liquid-fire/components/liquid-measured","liquid-fire/templates/components/liquid-container"],function(e,t,r,n){"use strict"
 function i(e,t){if(e.view){var n=e.view.$(),i=n.position()
-t||(t=(0,r.measure)(n)),n.outerWidth(t.width),n.outerHeight(t.height),n.css({position:"absolute",top:i.top,left:i.left})}}function o(e){e.view&&!e.view.isDestroyed&&e.view.$().css({width:"",height:"",position:""})}Object.defineProperty(e,"__esModule",{value:!0}),e.default=Ember.Component.extend(t.default,{layout:n.default,classNames:["liquid-container"],lockSize:function(e,t){e.outerWidth(t.width),e.outerHeight(t.height)},unlockSize:function(){var e=this,t=function(){e.updateAnimatingClass(!1)
-var t=e.$()
-t&&t.css({width:"",height:""})}
-this._scaling?this._scaling.then(t):t()},updateAnimatingClass:function(e){this.isDestroyed||(e?this.$().addClass("liquid-animating"):this.$().removeClass("liquid-animating"))},startMonitoringSize:Ember.on("didInsertElement",function(){this._wasInserted=!0}),actions:{willTransition:function(e){if(this._wasInserted){var t=this.$()
+t||(t=(0,r.measure)(n)),n.outerWidth(t.width),n.outerHeight(t.height),n.css({position:"absolute",top:i.top,left:i.left})}}function o(e){e.view&&!e.view.isDestroyed&&e.view.$().css({width:"",height:"",position:""})}Object.defineProperty(e,"__esModule",{value:!0}),e.default=Ember.Component.extend(t.default,{layout:n.default,classNames:["liquid-container"],lockSize:function(e,t){e.outerWidth(t.width),e.outerHeight(t.height)},unlockSize:function(){var e=this,t=function(){e.updateAnimatingClass(!1),e.element&&(e.element.style.width="",e.element.style.height="")}
+this._scaling?this._scaling.then(t):t()},updateAnimatingClass:function(e){this.isDestroyed||(e?this.element.classList.add("liquid-animating"):this.element.classList.remove("liquid-animating"))},didInsertElement:function(){this._super.apply(this,arguments),this._wasInserted=!0},actions:{willTransition:function(e){if(this._wasInserted){var t=this.$()
 this._cachedSize=(0,r.measure)(t)
 for(var n=0;n<e.length;n++)i(e[n])}},afterChildInsertion:function(e){for(var t=this.$(),n=!1!==this.get("enableGrowth"),o=[],a=0;a<e.length;a++)e[a].view&&(o[a]=(0,r.measure)(e[a].view.$()))
 var s=(0,r.measure)(t),u=this._cachedSize||s
@@ -5896,7 +5896,7 @@ if(e?e[0]&&(i=e[0].value):(t=!0,e=Ember.A()),t||!o(i,r)){this.notifyContainer("w
 var a={value:r}
 e.unshiftObject(a),this.firstTime=t,t&&Ember.set(this,"versions",e),r||this.get("renderWhenFalse")||t||this._transition()}else e[0]&&o!==n&&Ember.set(e[0],"value",r)},_transition:function(){var e=this,r=Ember.get(this,"versions"),n=void 0,i=this.firstTime
 this.firstTime=!1,this.notifyContainer("afterChildInsertion",r),n=Ember.get(this,"transitionMap").transitionFor({versions:r,parentElement:Ember.$((0,t.containingElement)(this)),use:Ember.get(this,"use"),rules:Ember.get(this,"rules"),matchContext:Ember.get(this,"matchContext")||{},firstTime:i?"yes":"no"}),this._runningTransition&&this._runningTransition.interrupt(),this._runningTransition=n,n.run().then(function(t){t||(e.finalizeVersions(r),e.notifyContainer("afterTransition",r))},function(t){throw e.finalizeVersions(r),e.notifyContainer("afterTransition",r),t})},finalizeVersions:function(e){e.replace(1,e.length-1)},notifyContainer:function(e,t){var r=Ember.get(this,"notify")
-r&&r.send(e,t)},actions:{childDidRender:function(e){var t=Ember.get(e,"version")
+r&&!r.get("isDestroying")&&r.send(e,t)},actions:{childDidRender:function(e){var t=Ember.get(e,"version")
 Ember.set(t,"view",e),this._transition()}}})}),define("liquid-fire/constrainables",["exports","liquid-fire/ember-internals"],function(e,t){"use strict"
 function r(e,t){var r=e.versions
 return r[t]?r[t].value:null}Object.defineProperty(e,"__esModule",{value:!0}),e.default={oldValue:{reversesTo:"newValue",accessor:function(e){return[r(e,1)]}},newValue:{reversesTo:"oldValue",accessor:function(e){return[r(e,0)]}},oldRoute:{reversesTo:"newRoute",accessor:function(e){return(0,t.routeName)((0,t.childRoute)(r(e,1),e.matchContext.outletName))}},newRoute:{reversesTo:"oldRoute",accessor:function(e){return(0,t.routeName)((0,t.childRoute)(r(e,0),e.matchContext.outletName))}},oldModel:{reversesTo:"newModel",accessor:function(e){return(0,t.routeModel)((0,t.childRoute)(r(e,1),e.matchContext.outletName))}},newModel:{reversesTo:"oldModel",accessor:function(e){return(0,t.routeModel)((0,t.childRoute)(r(e,0),e.matchContext.outletName))}},helperName:{accessor:function(e){return e.matchContext.helperName}},outletName:{accessor:function(e){return e.matchContext.outletName}},parentElementClass:{accessor:function(e){var t=e.parentElement.attr("class")
@@ -6012,7 +6012,7 @@ e.__esModule=!0,e.default=Ember.HTMLBars.template({id:"Hzp9zMkw",block:'{"symbol
 e.__esModule=!0,e.default=Ember.HTMLBars.template({id:"zzQG6qnT",block:'{"symbols":["outletState","version"],"statements":[[4,"-lf-get-outlet-state",null,null,{"statements":[[4,"liquid-bind",[[25,"lf-lock-model",[[19,1,[]],[20,["outletName"]]],null]],[["containerId","versionEquality","matchContext","class","use","rules","containerless","growDuration","growPixelsPerSecond","growEasing","shrinkDelay","growDelay","enableGrowth"],[[20,["containerId"]],[20,["versionEquality"]],[25,"hash",null,[["outletName","helperName"],[[20,["outletName"]],"liquid-outlet"]]],[20,["class"]],[20,["use"]],[20,["rules"]],[20,["containerless"]],[20,["growDuration"]],[20,["growPixelsPerSecond"]],[20,["growEasing"]],[20,["shrinkDelay"]],[20,["growDelay"]],[20,["enableGrowth"]]]],{"statements":[[4,"-with-dynamic-vars",null,[["outletState"],[[19,2,[]]]],{"statements":[[1,[25,"outlet",[[20,["outletName"]]],null],false]],"parameters":[]},null]],"parameters":[2]},null]],"parameters":[1]},null]],"hasEval":false}',meta:{moduleName:"liquid-fire/templates/components/liquid-outlet.hbs"}})}),define("liquid-fire/templates/components/liquid-spacer",["exports"],function(e){"use strict"
 e.__esModule=!0,e.default=Ember.HTMLBars.template({id:"38jhz2BI",block:'{"symbols":["&default"],"statements":[[4,"liquid-measured",null,[["measurements"],[[20,["measurements"]]]],{"statements":[[0,"  "],[11,1],[0,"\\n"]],"parameters":[]},null]],"hasEval":false}',meta:{moduleName:"liquid-fire/templates/components/liquid-spacer.hbs"}})}),define("liquid-fire/templates/components/liquid-sync",["exports"],function(e){"use strict"
 e.__esModule=!0,e.default=Ember.HTMLBars.template({id:"+zmdEDDc",block:'{"symbols":["&default"],"statements":[[11,1,[[25,"action",[[19,0,[]],"ready"],null]]],[0,"\\n"]],"hasEval":false}',meta:{moduleName:"liquid-fire/templates/components/liquid-sync.hbs"}})}),define("liquid-fire/templates/components/liquid-versions",["exports"],function(e){"use strict"
-e.__esModule=!0,e.default=Ember.HTMLBars.template({id:"DZLBc2eM",block:'{"symbols":["version","&default"],"statements":[[4,"each",[[20,["versions"]]],null,{"statements":[[4,"if",[[25,"lf-or",[[20,["renderWhenFalse"]],[19,1,["value"]]],null]],null,{"statements":[[4,"liquid-child",null,[["version","liquidChildDidRender","class"],[[19,1,[]],"childDidRender",[20,["class"]]]],{"statements":[[11,2,[[19,1,["value"]]]]],"parameters":[]},null]],"parameters":[]},null]],"parameters":[1]},null]],"hasEval":false}',meta:{moduleName:"liquid-fire/templates/components/liquid-versions.hbs"}})}),define("liquid-fire/templates/version-specific/get-outlet-state",["exports"],function(e){"use strict"
+e.__esModule=!0,e.default=Ember.HTMLBars.template({id:"As8vhR6u",block:'{"symbols":["version","&default"],"statements":[[4,"each",[[20,["versions"]]],null,{"statements":[[4,"if",[[25,"lf-or",[[20,["renderWhenFalse"]],[19,1,["value"]]],null]],null,{"statements":[[4,"liquid-child",null,[["version","liquidChildDidRender","class"],[[19,1,[]],[25,"action",[[19,0,[]],"childDidRender"],null],[20,["class"]]]],{"statements":[[11,2,[[19,1,["value"]]]]],"parameters":[]},null]],"parameters":[]},null]],"parameters":[1]},null]],"hasEval":false}',meta:{moduleName:"liquid-fire/templates/components/liquid-versions.hbs"}})}),define("liquid-fire/templates/version-specific/get-outlet-state",["exports"],function(e){"use strict"
 e.__esModule=!0,e.default=Ember.HTMLBars.template({id:"9Vrwtonc",block:'{"symbols":["&default"],"statements":[[11,1,[[25,"-get-dynamic-var",["outletState"],null]]]],"hasEval":false}',meta:{moduleName:"liquid-fire/templates/version-specific/get-outlet-state.hbs"}})}),define("liquid-fire/transition-map",["exports","liquid-fire/running-transition","liquid-fire/dsl","liquid-fire/action","liquid-fire/constraints"],function(e,t,r,n,i){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0})
 var o=Ember.Service.extend({init:function(){this._super.apply(this,arguments),this.activeCount=0,this.constraints=new i.default
@@ -6036,27 +6036,27 @@ return t.map(e),t}}),e.default=o}),define("liquid-fire/transitions/cross-fade",[
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{}
 return(0,t.stop)(this.oldElement),t.Promise.all([(0,t.animate)(this.oldElement,{opacity:0},e),(0,t.animate)(this.newElement,{opacity:[e.maxOpacity||1,0]},e)])}}),define("liquid-fire/transitions/default",["exports","liquid-fire"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=function(){this.newElement&&this.newElement.css({visibility:""})
-return t.Promise.resolve()}}),define("liquid-fire/transitions/explode",["exports","liquid-fire"],function(e,t){"use strict"
-function r(e,r,o){var a=Ember.copy(e),s=[r.pickOld||r.pick,r.pickNew||r.pick],u=void 0,l=void 0
-return!s[0]&&!s[1]||(u=n(e,"oldElement",a,s[0],o),l=n(e,"newElement",a,s[1],o),u||l)?i(a,r).finally(function(){u&&u(),l&&l()}):t.Promise.resolve()}function n(e,t,r,n,i){var o=void 0,a=void 0,s=void 0,u=void 0,l=void 0,c=e[t]
+return t.Promise.resolve()}}),define("liquid-fire/transitions/explode",["exports","ember-copy","liquid-fire"],function(e,t,r){"use strict"
+function n(e,n,a){var s=(0,t.copy)(e),u=[n.pickOld||n.pick,n.pickNew||n.pick],l=void 0,c=void 0
+return!u[0]&&!u[1]||(l=i(e,"oldElement",s,u[0],a),c=i(e,"newElement",s,u[1],a),l||c)?o(s,n).finally(function(){l&&l(),c&&c()}):r.Promise.resolve()}function i(e,t,r,n,i){var o=void 0,a=void 0,s=void 0,u=void 0,l=void 0,c=e[t]
 if(r[t]=null,c&&n&&(o=c.find(n).filter(function(){var e=Ember.guidFor(this)
 if(!i[e])return i[e]=!0,!0})).length>0){a=o.offset(),s=o.outerWidth(),u=o.outerHeight(),l=o.clone(),o.css({visibility:"hidden"}),"hidden"===c.css("visibility")&&l.css({visibility:"hidden"}),l.appendTo(c.parent()),l.outerWidth(s),l.outerHeight(u)
 var d=l.offsetParent().offset()
-return l.css({position:"absolute",top:a.top-d.top,left:a.left-d.left,margin:0}),r[t]=l,function(){l.remove(),o.css({visibility:""})}}}function i(e,r){return new t.Promise(function(n,i){(function(e,r){var n=void 0,i=void 0,o=void 0
-if(!r.use)throw new Error("every argument to the 'explode' animation must include a followup animation to 'use'")
-return Ember.isArray(r.use)?(n=r.use[0],i=r.use.slice(1)):(n=r.use,i=[]),o="function"==typeof n?n:e.lookup(n),function(){return t.Promise.resolve(o.apply(this,i))}})(e,r).apply(e).then(n,i)})}Object.defineProperty(e,"__esModule",{value:!0}),e.default=function(){for(var e=this,n={},o=!1,a=arguments.length,s=Array(a),u=0;u<a;u++)s[u]=arguments[u]
-var l=s.map(function(a){return a.matchBy?function(e,n,i){if(!e.oldElement||!e.newElement)return t.Promise.resolve()
-n.pick&&(e.oldElement=e.oldElement.find(n.pick),e.newElement=e.newElement.find(n.pick))
-n.pickOld&&(e.oldElement=e.oldElement.find(n.pickOld))
-n.pickNew&&(e.newElement=e.newElement.find(n.pickNew))
+return l.css({position:"absolute",top:a.top-d.top,left:a.left-d.left,margin:0}),r[t]=l,function(){l.remove(),o.css({visibility:""})}}}function o(e,t){return new r.Promise(function(n,i){(function(e,t){var n=void 0,i=void 0,o=void 0
+if(!t.use)throw new Error("every argument to the 'explode' animation must include a followup animation to 'use'")
+return Ember.isArray(t.use)?(n=t.use[0],i=t.use.slice(1)):(n=t.use,i=[]),o="function"==typeof n?n:e.lookup(n),function(){return r.Promise.resolve(o.apply(this,i))}})(e,t).apply(e).then(n,i)})}Object.defineProperty(e,"__esModule",{value:!0}),e.default=function(){for(var e=this,t={},i=!1,a=arguments.length,s=Array(a),u=0;u<a;u++)s[u]=arguments[u]
+var l=s.map(function(a){return a.matchBy?function(e,t,i){if(!e.oldElement||!e.newElement)return r.Promise.resolve()
+t.pick&&(e.oldElement=e.oldElement.find(t.pick),e.newElement=e.newElement.find(t.pick))
+t.pickOld&&(e.oldElement=e.oldElement.find(t.pickOld))
+t.pickNew&&(e.newElement=e.newElement.find(t.pickNew))
 var o=void 0
-o="id"===n.matchBy?function(e){return"#"+e}:"class"===n.matchBy?function(e){return"."+e}:function(e){var t=e.replace(/'/g,"\\'")
-return"["+n.matchBy+"='"+t+"']"}
-var a=Ember.A(e.oldElement.find("["+n.matchBy+"]").toArray())
-return t.Promise.all(a.map(function(a){var s=Ember.$(a).attr(n.matchBy)
-return""===s||0===e.newElement.find(o(s)).length?t.Promise.resolve():r(e,{pick:o(s),use:n.use},i)}))}(e,a,n):a.pick||a.pickOld||a.pickNew?r(e,a,n):(o=!0,i(e,a))})
-o||(this.newElement&&this.newElement.css({visibility:""}),this.oldElement&&this.oldElement.css({visibility:"hidden"}))
-return t.Promise.all(l)}}),define("liquid-fire/transitions/fade",["exports","liquid-fire"],function(e,t){"use strict"
+o="id"===t.matchBy?function(e){return"#"+e}:"class"===t.matchBy?function(e){return"."+e}:function(e){var r=e.replace(/'/g,"\\'")
+return"["+t.matchBy+"='"+r+"']"}
+var a=Ember.A(e.oldElement.find("["+t.matchBy+"]").toArray())
+return r.Promise.all(a.map(function(a){var s=Ember.$(a).attr(t.matchBy)
+return""===s||0===e.newElement.find(o(s)).length?r.Promise.resolve():n(e,{pick:o(s),use:t.use},i)}))}(e,a,t):a.pick||a.pickOld||a.pickNew?n(e,a,t):(i=!0,o(e,a))})
+i||(this.newElement&&this.newElement.css({visibility:""}),this.oldElement&&this.oldElement.css({visibility:"hidden"}))
+return r.Promise.all(l)}}),define("liquid-fire/transitions/fade",["exports","liquid-fire"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=function(){var e=this,r=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},n=void 0,i=r,o=function(e){for(var r=0;r<e.older.length;r++){var n=e.older[r]
 if((0,t.isAnimating)(n.element,"fade-out"))return n.element}if((0,t.isAnimating)(e.oldElement,"fade-out"))return e.oldElement}(this)
 o?n=(0,t.finish)(o,"fade-out"):((0,t.isAnimating)(this.oldElement,"fade-in")&&(i={duration:(0,t.timeSpent)(this.oldElement,"fade-in")}),(0,t.stop)(this.oldElement),n=(0,t.animate)(this.oldElement,{opacity:0},i,"fade-out"))
