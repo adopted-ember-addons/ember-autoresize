@@ -27,7 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "dom-ruler": "^0.2.5",
-    "ember-cli-babel": "^6.6.0",
+    "ember-cli-babel": "^7.1.2",
     "ember-cli-version-checker": "^2.1.0",
     "ember-copy": "^1.0.0",
     "ember-get-config": "^0.2.4"
