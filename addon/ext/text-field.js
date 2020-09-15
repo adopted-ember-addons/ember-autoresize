@@ -39,9 +39,9 @@ TextField.reopen(AutoResize, {
     @attribute autoResizeText
     @type String
    */
-  autoResizeText: computed('value', 'placeholder', {
+  autoResizeText: computed('value', 'placeholder', 'autoresizeElement', {
     get() {
-      var placeholder = get(this, 'placeholder');
+      var placeholder = get(this, 'placeholder') || (this.autoresizeElement && this.autoresizeElement.getAttribute('placeholder'));
       var value = get(this, 'value');
 
       if (isEmpty(value)) {
